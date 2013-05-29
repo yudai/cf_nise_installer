@@ -1,0 +1,428 @@
+---
+deployment: appcloud
+
+# String '196.168.10.10' will be replaced with the real IP address
+
+jobs:
+- name: micro
+  template:
+  - postgres
+  - nats
+  - dea_next
+  - health_manager_next
+  - serialization_data_server
+  - uaa
+  - vcap_redis
+  - mysql_node_ng
+  - mysql_gateway
+  - postgresql_node_ng
+  - postgresql_gateway
+- name: micro_ng
+  template:
+  - cloud_controller_ng
+  - gorouter
+
+properties:
+  micro: true
+
+  networks:
+    apps: default
+    management: default
+
+  app_domains:
+    - 192.168.10.10.xip.io
+  system_domain: 192.168.10.10.xip.io
+  system_domain_organization: micro_org
+
+  uaa_client_id: cf
+  uaa_endpoint: http://uaa.192.168.10.10.xip.io
+  uaa_client_auth_credentials:
+    username: micro@vcap.me
+    password: micr0@micr0
+
+
+  domain: 192.168.10.10.xip.io
+  env:
+  cc_props: ccng
+  hm_props: health_manager_ccng
+  dea:
+    max_memory: 2048
+  dea_next:
+    memory_mb: 2048
+    disk_mb: 8192
+    num_instances: 16
+  router:
+    client_inactivity_timeout: 600
+    app_inactivity_timeout: 600
+    local_route: 127.0.0.1
+    status:
+      port: 8080
+      user:
+      password:
+  nats:
+    user: nats
+    password: nats
+    address: 192.168.10.10
+    port: 4222
+
+  ccdb:
+    template: postgres
+    address: 127.0.0.1
+    port: 2545
+    databases:
+    - tag: cc
+      name: appcloud
+    - tag: uaa
+      name: uaa
+    roles:
+    - name: root
+      password:
+      tag: admin
+    - name: uaa
+      password:
+      tag: uaa
+
+  ccdb_ng:
+    address: 127.0.0.1
+    port: 2545
+    pool_size: 10
+    max_connections: 256
+    databases:
+    - tag: cc
+      name: appcloud_ng
+      citext: true
+    - tag: uaa
+      name: uaa_ng
+      citext: true
+    roles:
+    - name: root
+      password:
+      tag: admin
+    - name: uaa
+      password:
+      tag: uaa
+
+  health_manager_ccng:
+    shadow_mode: disable
+    cc_partition: ng
+
+  cc: &cc
+    description: "VMware's Micro Cloud Application Platform"
+    srv_api_uri: http://api.192.168.10.10.xip.io
+    password: password
+    token: token
+    allow_debug: true
+    allow_registration: true
+    admins:
+    - admin@vcap.me
+    admin_account_capacity:
+      memory: 2048
+      app_uris: 32
+      services: 16
+      apps: 16
+    default_account_capacity:
+      memory: 2048
+      app_uris: 32
+      services: 16
+      apps: 16
+    staging_upload_user: qawsderfgt
+    staging_upload_password: qawsdefrgtyhu
+    uaa:
+      enabled: true
+      resource_id: cloud_controller
+      token_creation_email_filter: [""]
+    service_extension:
+      service_lifecycle:
+        max_upload_size: 5
+    use_nginx: false
+    bootstrap_admin_email: micro@vcap.me
+    uaa_resource_id: cloud_controller
+    quota_definitions:
+      free:
+        total_services: 10
+        free_memory_limit: 256
+        paid_memory_limit: 1024
+    admins:
+    db_encryption_key: "secret"
+    bulk_api_password: bulk_api_password
+
+  ccng: *cc
+
+  mysql_gateway:
+    ip_route: 127.0.0.1
+    supported_versions: ["5.5"]
+    version_aliases:
+      current: "5.5"
+    default_plan: "100"
+    token: token
+    cc_api_version: v2
+  mysql_node:
+    ip_route: 127.0.0.1
+    available_storage: 2048
+    password: password
+    max_db_size: 256
+    supported_versions: ["5.5"]
+    default_version: "5.5"
+    max_tmp: 1024
+  redis_gateway:
+    ip_route: 127.0.0.1
+    token: token
+    supported_versions: ["2.2"]
+    version_aliases:
+      current: "2.2"
+    cc_api_version: v2
+  redis_node:
+    ip_route: 127.0.0.1
+    available_memory: 256
+    supported_versions: ["2.2"]
+    default_version: "2.2"
+  mongodb_gateway:
+    ip_route: 127.0.0.1
+    token: token
+    supported_versions: ["1.8", "2.0"]
+    version_aliases:
+      current: "2.0"
+      deprecated: "1.8"
+    cc_api_version: v2
+  mongodb_node:
+    ip_route: 127.0.0.1
+    available_memory: 256
+    supported_versions: ["2.2"]
+    default_version: "2.2"
+    max_tmp: 900
+  postgresql_gateway:
+    ip_route: 127.0.0.1
+    admin_user: psql_admin
+    token: token
+    supported_versions: ["9.1"]
+    version_aliases:
+      current: "9.1"
+    default_plan: "100"
+    cc_api_version: v2
+  postgresql_node:
+    ip_route: 127.0.0.1
+    admin_user: psql_admin
+    available_storage: 2048
+    max_db_size: 256
+    max_long_tx: 30
+    supported_versions: ["9.1"]
+    default_version: "9.1"
+    password: secret
+  postgresql_server:
+    max_connections: 30
+    listen_address: 127.0.0.1
+  rabbit_gateway:
+    ip_route: 127.0.0.1
+    port: 8000
+    token: token
+    supported_versions: ["2.4"]
+    version_aliases:
+      current: "2.4"
+    cc_api_version: v2
+  rabbit_node:
+    ip_route: 127.0.0.1
+    supported_versions: ["2.4"]
+    default_version: "2.4"
+  serialization_data_server:
+    use_nginx: false
+    upload_timeout: 10
+    port: 8090
+    upload_file_expire_time: 600
+    purge_expired_interval: 30
+    upload_token: upload_token
+  service_lifecycle:
+    download_url: 127.0.0.1
+    mount_point: /var/vcap/service_lifecycle
+    tmp_dir: /var/vcap/service_lifecycle/tmp_dir
+    resque:
+      host: 127.0.0.1
+      port: 3456
+      password: password
+    nfs_server:
+      address: 127.0.0.1
+      export_dir: /cfsnapshot
+    serialization_data_server:
+    - 127.0.0.1
+  stager:
+    max_staging_duration: 120
+    max_active_tasks: 20
+    queues:
+    - staging
+  uaa:
+    cc:
+      token_secret: token_sercret
+      client_secret: client_secret
+    client:
+      autoapprove: false
+    admin:
+      client_secret: client_secret
+    login:
+      client_secret: client_sercret
+    batch:
+      username: username
+      password: password
+    port: 8100
+    catalina_opts: -Xmx128m -Xms30m -XX:MaxPermSize=128m
+    scim:
+      users:
+        - micro@vcap.me|micr0@micr0|scim.write,scim.read,openid
+    client:
+      autoapprove:
+        - cf
+        - my
+        - portal
+        - micro
+        - support-signon
+        - login
+    clients:
+      support-services:
+        scope: scim.write,scim.read,openid,cloud_controller.read,cloud_controller.write
+        secret: ssosecretsso
+        id: support-services
+        authorized-grant-types: authorization_code,client_credentials
+        redirect-uri: http://support-signon.cf.vcap.me
+        authorities: portal.users.read
+        access-token-validity: 1209600
+        refresh-token-validity: 1209600
+      cf:
+        override: true
+        authorized-grant-types: password,implicit
+        authorities: uaa.none
+        scope: cloud_controller.read,cloud_controller.write,openid,password.write,cloud_controller.admin,scim.read,scim.write
+    no_ssl: true
+  uaadb:
+    db_scheme: postgresql
+    address: 127.0.0.1
+    port: 2545
+    roles:
+    - tag: admin
+      name: uaa
+      password:
+    databases:
+    - tag: uaa
+      name: uaa_ng
+  vcap_redis:
+    address: 127.0.0.1
+    port: 3456
+    password:
+    maxmemory: 500000000
+  db: ccdb_ng
+  login:
+    enabled: false
+  plan: "100"
+  service_plans:
+    mysql:
+      "100":
+        description: "Shared server, shared VM, 1MB memory, 10MB storage, 10 connections"
+        free: true
+        job_management:
+          high_water: 450
+          low_water: 50
+        configuration:
+          capacity: 500
+          max_db_size: 10
+          key_buffer: 512
+          innodb_buffer_pool_size: 512
+          max_allowed_packet: 16
+          thread_cache_size: 128
+          query_cache_size: 128
+          max_long_query: 3
+          max_long_tx: 30
+          max_clients: 10
+          max_connections: 1000
+          table_open_cache: 2000
+          innodb_tables_per_database: 50
+          connection_pool_size:
+            min: 5
+            max: 10
+          backup:
+            enable: true
+          lifecycle:
+            enable: true
+            serialization: enable
+            snapshot:
+              quota: 1
+            worker_count: 5
+          warden:
+            enable: false
+    postgresql:
+      "100":
+        description: "Shared server, shared VM, 1MB memory, 10MB storage, 10 connections"
+        free: true
+        job_management:
+          high_water: 450
+          low_water: 50
+        configuration:
+          capacity: 500
+          max_db_size: 10
+          max_long_query: 3
+          max_long_tx: 10
+          max_clients: 10
+          max_connections: 1000
+          shared_buffers: 312
+          effective_cache_size: 1115
+          shmmax: 390070272
+          checkpoint_segments: 16
+          checkpoint_segments_max: 50
+          maintenance_work_mem: 30
+          backup:
+            enable: true
+          lifecycle:
+            enable: true
+            serialization: enable
+            snapshot:
+              quota: 1
+            worker_count: 5
+          warden:
+            enable: false
+    mongodb:
+      "100":
+        description: "Dedicated server, shared VM, 250MB storage, 10 connections"
+        free: true
+        job_management:
+          high_water: 100
+          low_water: 20
+        configuration:
+          capacity: 125
+          max_clients: 10
+          quota_files: 4
+          quota_data_size: 240
+          enable_journaling: true
+          backup:
+            enable: true
+          lifecycle:
+            enable: true
+            serialization: enable
+            snapshot:
+              quota: 1
+            worker_count: 5
+          warden:
+            enable: false
+    rabbit:
+      free:
+        job_management:
+          low_water: 100
+          high_water: 1400
+        configuration:
+          max_memory_factor: 0.5
+          max_clients: 512
+          capacity: 200
+    redis:
+      free:
+        job_management:
+          high_water: 1400
+          low_water: 100
+        configuration:
+          capacity: 200
+          max_memory: 16
+          max_swap: 32
+          max_clients: 500
+          backup:
+            enable: true
+    vblob:
+      free:
+        job_management:
+          low_water: 100
+          high_water: 1400
+        configuration:
+          capacity: 200
