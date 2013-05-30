@@ -17,7 +17,7 @@
 
 ```sh
 sudo apt-get install curl
-bash < <(curl -s -k -B wget https://raw.github.com/yudai/cf_nise_installer/master/scripts/bootstrap.sh)
+bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/scripts/bootstrap.sh)
 ```
 
 #### Customized install
