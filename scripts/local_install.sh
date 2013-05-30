@@ -19,10 +19,12 @@ if [ ! -d ~/.rbenv ]; then
     git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
     echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-    . ~/.bash_profile
 fi
-rbenv install 1.9.3-p392
-rbenv global 1.9.3-p392
+. ~/.bash_profile
+if ! (rbenv versions | grep -q 1.9.3-p392); then
+    rbenv install 1.9.3-p392
+fi
+rbenv local 1.9.3-p392
 
 # BOSH CLI and CF commands
 gem install bundler --no-rdoc --no-ri
