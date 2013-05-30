@@ -47,7 +47,7 @@ You can create a devbox vagrant VM with [nise-bosh-vagrant](https://github.com/B
 #### Requirements
 
 * Vagrant 1.2 or later
-* Ruby 1.9.2 or later
+* Ruby 1.9.3-p392 (Required by cf-release)
 
 #### Install
 
