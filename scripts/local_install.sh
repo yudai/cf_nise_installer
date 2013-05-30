@@ -5,7 +5,7 @@ sudo apt-get update
 sudo apt-get install -y git-core
 
 # Nise BOSH
-if [ ! -d ~/nise_bosh ]; then
+if [ ! -d nise_bosh ]; then
     git clone https://github.com/nttlabs/nise_bosh.git
 fi
 (
