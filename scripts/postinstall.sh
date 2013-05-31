@@ -15,3 +15,6 @@ if ! (grep -q "${export_line}" /etc/exports); then
 fi
 sudo mkdir -p /cfsnapshot
 sudo /etc/init.d/nfs-kernel-server restart
+
+# launch monit daemon
+sudo /var/vcap/bosh/bin/monit

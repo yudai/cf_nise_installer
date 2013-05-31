@@ -53,7 +53,6 @@ sed -i "s/192.168.10.10/${current_ip}/g" micro.yml
 
 set +x
 echo "Done!"
-echo "Start Monit daemon: 'sudo /var/vcap/bosh/bin/monit'"
 echo "Start CF processes: 'sudo /var/vcap/bosh/bin/monit start all'"
 echo "Check the status of CF processes: 'sudo /var/vcap/bosh/bin/monit status'"
 echo "Simpler status summary: 'sudo /var/vcap/bosh/bin/monit summary'"
