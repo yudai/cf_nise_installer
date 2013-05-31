@@ -64,7 +64,7 @@ git clone https://github.com/yudai/cf_nise_installer.git
 ./cf_nise_installer/scripts/clone_cf_release.sh
 
 # Run
-nise-bosh-vagrant ./cf-release --manifest ./cf_nise_installer/manifests/micro.yml --postinstall ./cf_nise_installer/scripts/postinstall.sh --memory 2048 --start
+nise-bosh-vagrant ./cf-release --manifest ./cf_nise_installer/manifests/micro.yml --postinstall ./cf_nise_installer/scripts/postinstall.sh --memory 4096 --start
 ```
 
 ## Play with Cloud Foundry v2
