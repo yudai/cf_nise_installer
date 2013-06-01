@@ -12,6 +12,9 @@
 #### Requirements
 
 * Ubuntu 10.04 64bit
+* 8GB+ free HDD space
+* 4Gb+ memory
+   * m1.large or larger instance is recommended on AWS
 
 #### Full-automatic install
 
@@ -48,6 +51,8 @@ You can create a devbox vagrant VM with [nise-bosh-vagrant](https://github.com/B
 
 * Vagrant 1.2 or later
 * Ruby 1.9.3-p392 (Required by cf-release)
+* 8GB+ free HDD space
+* 4GB+ free memory
 
 #### Install
 
