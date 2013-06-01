@@ -106,6 +106,8 @@ You can target and login to your installed devbox using following values:
 
 When you installed your devbox with Vagrant, you can access your devobx only from the host machine that runs the VM.
 
+'[xip.io](http://xip.io/)' is a DNS service provided by 37signals that returns the IP address specified in the subdomain of FQDNs.
+
 ### Service token registration
 
 To create services, you need to register tokens to UAA.
