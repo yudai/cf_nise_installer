@@ -1,12 +1,14 @@
 #!/bin/bash -ex
 
 INSTALLER_REPO=${INSTALLER_REPO:-https://raw.github.com/yudai/cf_nise_installer}
+INSTALLER_BRANCH=${INSTALLER_BRANCH:-master}
 
+installer_url=${INSTALLER_REPO}/${INSTALLER_BRANCH}
 for file in local_install.sh clone_cf_release.sh postinstall.sh; do
-    wget ${INSTALLER_REPO}/master/scripts/${file} -O ${file}
+    wget ${installer_url}/scripts/${file} -O ${file}
     chmod u+x ${file}
 done
 
-wget ${INSTALLER_REPO}/master/manifests/micro.yml -O micro.yml
+wget ${installer_url}/manifests/micro.yml -O micro.yml
 
 ./local_install.sh
