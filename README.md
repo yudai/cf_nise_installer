@@ -53,6 +53,17 @@ Confirm all the processes shown by `monit summary` indicate `running`. It takes 
 You can update your existing devbox with the latest cf-release resources by executing `local_install.sh` script downloaded by the `bootstrap.sh` script.
 
 
+### Customize Devbox
+
+You can choose your cf-release repositry and its branch to install by setting environmental variables.
+
+| Name              | Default                                        |
+| :---------------: | :--------------------------------------------: |
+| CF_RELEASE_UR     | https://github.com/cloudfoundry/cf-release.git |
+| CF_RELEASE_BRANCH | master                                         |
+
+These values are used only when no `cf-release` directory exists in the working directory. You can put your prefered cf-release before running the script.
+
 ## Build Devbox with Vagrant
 
 You can create a devbox VM quickly with Vagrant and [nise-bosh-vagrant](https://github.com/BrianMMcClain/nise-bosh-vagrant).
