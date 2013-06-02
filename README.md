@@ -59,10 +59,10 @@ You can choose your cf-release repositry and its branch to install by setting en
 
 | Name              | Default                                        |
 | :---------------: | :--------------------------------------------: |
-| CF_RELEASE_UR     | https://github.com/cloudfoundry/cf-release.git |
+| CF_RELEASE_URI     | https://github.com/cloudfoundry/cf-release.git |
 | CF_RELEASE_BRANCH | master                                         |
 
-These values are used only when no `cf-release` directory exists in the working directory. You can put your prefered cf-release before running the script.
+These values are used only when no `cf-release` directory exists in the working directory. You can also put your prefered cf-release before running the script.
 
 ## Build Devbox with Vagrant
 
