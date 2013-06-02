@@ -1,5 +1,8 @@
 #!/bin/bash -ex
 
+# sudo
+sudo -v
+
 INSTALLER_REPO=${INSTALLER_REPO:-https://raw.github.com/yudai/cf_nise_installer}
 INSTALLER_BRANCH=${INSTALLER_BRANCH:-master}
 
