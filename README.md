@@ -105,6 +105,14 @@ Run the following command:
 nise-bosh-vagrant ./cf-release --manifest ./cf_nise_installer/manifests/micro.yml --postinstall ./cf_nise_installer/scripts/postinstall.sh --memory 4096 --start
 ```
 
+### Public Network
+
+If you want to make your devbox accessible from other hosts, you need to add the `--bridge` option and specify the IP address of the VM with the `--address` option.
+
+```sh
+nise-bosh-vagrant ./cf-release --manifest ./cf_nise_installer/manifests/micro.yml --postinstall ./cf_nise_installer/scripts/postinstall.sh --memory 4096 --start --bridge --address 10.1.1.39
+```
+
 ## Play with installed Devbox
 
 You can target and login to your installed devbox using following values:
