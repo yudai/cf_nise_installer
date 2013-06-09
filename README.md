@@ -26,17 +26,19 @@ Run the commands below on your server:
 
 ```sh
 sudo apt-get install curl
-bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/scripts/bootstrap.sh)
+bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/scripts/local_bootstrap.sh)
 ```
 
 The `bootstrap.sh` script installs everything needed for the devbox. This command may take a couple of hours at first run.
 
 ### Launch Processes
 
-Once the installation completes, You can launch the processes for the devbox with the Monit which installed by Nise BOSH.
+The `bootstrap.sh` script automatically start up the processes. You can target the Cloud Controller once the installation completes.
+
+You can manually manage the processes for the devbox with the Monit which installed by Nise BOSH.
 
 ```sh
-# Start Monit (required only after rebooting your server)
+# Start Monit
 sudo /var/vcap/bosh/bin/monit
 # Launch `all` processes
 sudo /var/vcap/bosh/bin/monit start all
@@ -46,6 +48,7 @@ sudo /var/vcap/bosh/bin/monit summary # shorter
 # Stop `all` processes
 sudo /var/vcap/bosh/bin/monit stop all
 ```
+
 Confirm all the processes shown by `monit summary` indicate `running`. It takes a few minutes to initialize all processes.
 
 ### Update Existing Devobox
@@ -59,7 +62,7 @@ You can choose your cf-release repositry and its branch to install by setting en
 
 | Name              | Default                                        |
 | :---------------: | :--------------------------------------------: |
-| CF_RELEASE_URI     | https://github.com/cloudfoundry/cf-release.git |
+| CF_RELEASE_URI    | https://github.com/cloudfoundry/cf-release.git |
 | CF_RELEASE_BRANCH | master                                         |
 
 These values are used only when no `cf-release` directory exists in the working directory. You can also put your prefered cf-release before running the script.
@@ -75,43 +78,26 @@ You can create a devbox VM quickly with Vagrant and [nise-bosh-vagrant](https://
 * 8GB+ free HDD space
 * 4GB+ free memory
 
-### Preparation
-
-Install some gems required for installation and clone this repository.
-
-```sh
-# Install required gems, add `sudo` if needed
-gem install bosh_cli bundler nise-bosh-vagrant
-rbenv rehash # for rbenv users
-
-git clone https://github.com/yudai/cf_nise_installer.git
-```
-
-### Build cf-release
-
-You need a 'release' of cf-release repository that contains all source code for Cloud Foundry.
-
-If you don't have a release. You can build one by executing following command. This command may take one hour at first run.
-
-```sh
-./cf_nise_installer/scripts/clone_cf_release.sh
-```
-
 ### Launch Vagrant VM
 
 Run the following command:
 
 ```sh
-nise-bosh-vagrant ./cf-release --manifest ./cf_nise_installer/manifests/micro.yml --postinstall ./cf_nise_installer/scripts/postinstall.sh --memory 4096 --start
+sudo apt-get install curl
+bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/scripts/vagrant_bootstrap.sh)
 ```
 
-### Public Network
+### Customize Devbox
 
-If you want to make your devbox accessible from other hosts, you need to add the `--bridge` option and specify the IP address of the VM with the `--address` option.
+You can choose your cf-release repositry and its branch to install by setting environmental variables. Additionally, you can configure the VMs which Vagrant creates.
 
-```sh
-nise-bosh-vagrant ./cf-release --manifest ./cf_nise_installer/manifests/micro.yml --postinstall ./cf_nise_installer/scripts/postinstall.sh --memory 4096 --start --bridge --address 10.1.1.39
-```
+| Name              | Default                                        |
+| :---------------: | :--------------------------------------------: |
+| CF_RELEASE_URI    | https://github.com/cloudfoundry/cf-release.git |
+| CF_RELEASE_BRANCH | master                                         |
+| BRIDGE_IP_ADDRESS | *nil*                                          |
+| VAGRANT_MEMORY    | 4096                                           |
+
 
 ## Play with installed Devbox
 
