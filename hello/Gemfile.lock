@@ -1,6 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    cf-autoconfig (0.2.1)
+      cf-runtime (= 0.2.0)
+    cf-runtime (0.2.0)
+    mysql2 (0.3.11)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -14,4 +18,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cf-autoconfig
+  mysql2
   sinatra
