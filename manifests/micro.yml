@@ -6,7 +6,6 @@ deployment: appcloud
 jobs:
 - name: micro
   template:
-  - debian_nfs_server
   - postgres
   - nats
   - dea_next
@@ -241,7 +240,7 @@ properties:
       password: password
     nfs_server:
       address: 127.0.0.1
-      export_dir: /var/vcap/store/shared
+      export_dir: /cfsnapshot
     serialization_data_server:
     - 127.0.0.1
   stager:
@@ -427,9 +426,3 @@ properties:
           high_water: 1400
         configuration:
           capacity: 200
-
-  debian_nfs_server:
-    no_root_squash: true
-  nfs_server:
-    address: 127.0.0.1
-    network: 127.0.0.1/24
