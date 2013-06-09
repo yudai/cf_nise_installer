@@ -157,7 +157,7 @@ properties:
     token: token
     cc_api_version: v2
   mysql_node:
-    ip_route: 127.0.0.1
+    ip_route: 192.168.10.10
     available_storage: 2048
     password: password
     max_db_size: 256
@@ -172,7 +172,7 @@ properties:
       current: "2.2"
     cc_api_version: v2
   redis_node:
-    ip_route: 127.0.0.1
+    ip_route: 192.168.10.10
     available_memory: 256
     supported_versions: ["2.2"]
     default_version: "2.2"
@@ -185,7 +185,7 @@ properties:
       deprecated: "1.8"
     cc_api_version: v2
   mongodb_node:
-    ip_route: 127.0.0.1
+    ip_route: 192.168.10.10
     available_memory: 256
     supported_versions: ["2.2"]
     default_version: "2.2"
@@ -200,7 +200,7 @@ properties:
     default_plan: "100"
     cc_api_version: v2
   postgresql_node:
-    ip_route: 127.0.0.1
+    ip_route: 192.168.10.10
     admin_user: psql_admin
     available_storage: 2048
     max_db_size: 256
@@ -220,7 +220,7 @@ properties:
       current: "2.4"
     cc_api_version: v2
   rabbit_node:
-    ip_route: 127.0.0.1
+    ip_route: 192.168.10.10
     supported_versions: ["2.4"]
     default_version: "2.4"
   serialization_data_server:
