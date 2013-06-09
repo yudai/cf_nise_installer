@@ -34,7 +34,7 @@ rbenv rehash
 ./scripts/clone_cf_release.sh
 
 # Set current ip to nats server
-export CURRENT_IP=`ip addr | grep 'inet .*global' | cut -f 6 -d ' ' | cut -f1 -d '/'`
+export CURRENT_IP=`ip addr | grep 'inet .*global' | cut -f 6 -d ' ' | cut -f1 -d '/'` | head -n 1
 sed -i "s/192.168.10.10/${CURRENT_IP}/g" manifests/micro.yml
 
 # Run
