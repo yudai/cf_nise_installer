@@ -1,8 +1,5 @@
 #!/bin/bash -ex
 
-# gems
-gem install cf admin-cf-plugin --no-rdoc --no-ri
-
 # NFS for SDS
 export_line='/cfsnapshot     127.0.0.1(rw,sync,no_subtree_check)'
 sudo apt-get install nfs-kernel-server
@@ -18,6 +15,3 @@ sudo sed -i "s/bind-address            = 127.0.0.1//g" /var/vcap/jobs/mysql_node
 sudo sed -i "s/listen_addresses = '127.0.0.1'/listen_addresses = '*'/g" /var/vcap/jobs/postgresql_node_ng/config/postgresql.conf
 sudo sed -i "s/listen_addresses = '127.0.0.1'/listen_addresses = '*'/g" /var/vcap/jobs/postgresql_node_ng/config/postgresql91.conf
 sudo sed -i "s/listen_addresses = '127.0.0.1'/listen_addresses = '*'/g" /var/vcap/jobs/postgresql_node_ng/config/postgresql92.conf
-
-# launch monit daemon
-sudo /var/vcap/bosh/bin/monit
