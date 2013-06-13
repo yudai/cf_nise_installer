@@ -1,7 +1,7 @@
-#/bin/bosh -ex
+#!/bin/bash -ex
 
 sudo /var/vcap/bosh/bin/monit
-
+sleep 5
 sudo /var/vcap/bosh/bin/monit start all
 
 echo "Waiting for all processes to start"

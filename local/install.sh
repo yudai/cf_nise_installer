@@ -1,8 +1,10 @@
 #!/bin/bash -ex
 
 # Git bootstrap
-sudo apt-get update
-sudo apt-get install -y git-core
+if ! (which git); then
+    sudo apt-get update
+    sudo apt-get install -y git-core
+fi
 
 # Nise BOSH
 if [ ! -d nise_bosh ]; then
@@ -31,31 +33,17 @@ gem install bundler bosh_cli cf admin-cf-plugin --no-rdoc --no-ri
 rbenv rehash
 
 # cf-release
-./scripts/clone_cf_release.sh
-
-# Set current ip to nats server
-export CURRENT_IP=`ip addr | grep 'inet .*global' | cut -f 6 -d ' ' | cut -f1 -d '/' | head -n 1`
-sed -i "s/192.168.10.10/${CURRENT_IP}/g" manifests/micro.yml
+./local/clone_cf_release.sh
 
 # Run
-(
-    cd nise_bosh
-    bundle install
-    # Old spec format
-    sudo env PATH=$PATH bundle exec ./bin/nise-bosh -y ../cf-release ../manifests/micro.yml micro
-    # New spec format, keeping the  monit files installed in the previous run
-    sudo env PATH=$PATH bundle exec ./bin/nise-bosh --keep-monit-files -y ../cf-release ../manifests/micro.yml micro_ng
-)
+./local/launch_nise_bosh.sh
 
 # Postinstall
-./scripts/postinstall.sh
-
-# Startup
-./scripts/start_processes.sh
-
-# Tokens
-./scripts/register_service_tokens.sh
+./local/postinstall.sh
 
 set +x
+NISE_IP_ADDRESS=${NISE_IP_ADDRESS:-`ip addr | grep 'inet .*global' | cut -f 6 -d ' ' | cut -f1 -d '/' | head -n 1`}
 echo "Done!"
 echo "RESTART your server!"
+echo "CF target: 'cf target api.${NISE_IP_ADDRESS}.xip.io'"
+echo "CF login : 'cf login --password micr0@micr0 micro@vcap.me'"

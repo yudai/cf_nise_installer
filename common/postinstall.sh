@@ -1,5 +1,7 @@
 #!/bin/bash -ex
 
+# Be careful, this file may be a symbolic link
+
 # NFS for SDS
 export_line='/cfsnapshot     127.0.0.1(rw,sync,no_subtree_check)'
 sudo apt-get install nfs-kernel-server
