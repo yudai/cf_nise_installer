@@ -95,7 +95,7 @@ You can customize your installation using environment variables.
 | CF_RELEASE_URI    | URI for cf-release | clone_cf_release.sh | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
 | CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                         |
 | NISE_IP_ADDRESS   | IP address to bind CF components         | install.sh, register_service_tokens.sh  | Automatically detected using `ip` command      |
-
+| NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
 
 ## Build Devbox with Vagrant
 
@@ -171,7 +171,7 @@ You can customize your installation using environment variables.
 | CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                        |
 | NISE_IP_ADDRESS   | IP address for the VM. When this variable is set, the attached network will be bridged  | launch_nise_bosh.sh, register_service_tokens.sh | *nil* (192.168.10.10, not bridged) |
 | VAGRANT_MEMORY    | Memory size for the VM                   | launch_nise_bosh.sh                     | 4096                                           |
-
+| NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
 
 ## Playing with installed Devbox
 
@@ -189,7 +189,7 @@ When you installed your devbox with Vagrant, you can access your devbox only fro
 
 ### Service token registration
 
-To create services, you need to register tokens to UAA. 
+To create services, you need to register tokens to UAA.
 
 With the Vagrant setup, this step is automatically done. You need to run the following command only when you installed your devbox on your local machine.
 
