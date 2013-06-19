@@ -20,6 +20,13 @@ If you want to build a devbox on a Vagrant VM, skip this section and see the nex
 * 4GB+ memory
    * m1.medium or larger instance is recommended on AWS
 
+### *NOTICE*
+
+The latest cf-release has a problem on provisioning service instances.
+
+Use the older revision `ea61ec6f8f` of cf-release by setting the `CF_RELEASE_BRANCH` environment variable or revert the revision `03af1d4` in `src/cloud_controller_ng` manually.
+
+
 ### Installing Cloud Foundry Components
 
 Run the commands below on your server:
