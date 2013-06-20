@@ -99,7 +99,7 @@ You can customize your installation using environment variables.
 | :---------------: | :--------------------------------------: | :-------------------------------------: | :--------------------------------------------: |
 | INSTALLER_URL     | URI for cf_nise_installer                | bootstrap.sh                            | https://github.com/yudai/cf_nise_installer.git |
 | INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | master                                         |
-| CF_RELEASE_URI    | URI for cf-release | clone_cf_release.sh | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
+| CF_RELEASE_URL    | URI for cf-release | clone_cf_release.sh | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
 | CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                         |
 | NISE_IP_ADDRESS   | IP address to bind CF components         | install.sh, register_service_tokens.sh  | Automatically detected using `ip` command      |
 | NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
@@ -154,7 +154,7 @@ You can destroy your existing VM and delete generated files with the following c
 
 ```sh
 cd cf-release
-vagrant destroy && rm -rf .nise-bosh-* Vagrantfile .vagrant 
+vagrant destroy && rm -rf .nise-bosh-* Vagrantfile .vagrant
 ```
 
 When you want to update CF components without rebuilding your VM itself, you can SSH into your VM and re-run the Nise BOSH.
@@ -174,7 +174,7 @@ You can customize your installation using environment variables.
 | :---------------: | :--------------------------------------: | :-------------------------------------: | :--------------------------------------------: |
 | INSTALLER_URL     | URI for cf_nise_installer                | bootstrap.sh                            | https://github.com/yudai/cf_nise_installer.git |
 | INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | master                                         |
-| CF_RELEASE_URI    | URI for cf-release                       | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
+| CF_RELEASE_URL    | URI for cf-release                       | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
 | CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                        |
 | NISE_IP_ADDRESS   | IP address for the VM. When this variable is set, the attached network will be bridged  | launch_nise_bosh.sh, register_service_tokens.sh | *nil* (192.168.10.10, not bridged) |
 | VAGRANT_MEMORY    | Memory size for the VM                   | launch_nise_bosh.sh                     | 4096                                           |
