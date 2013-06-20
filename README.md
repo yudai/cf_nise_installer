@@ -40,6 +40,16 @@ The `bootstrap.sh` script installs everything needed for your devbox. This comma
 
 You need to restart your server once after the installation is completed.
 
+#### For Stability
+
+cf_nise_installer uses the master branch of cf-release by default. It is sometimes unstable and does not work properly. If you want to install a stabler instance, you can choose the `release-candidate` branch by setting the `CF_RELEASE_BRANCH` environment variable.
+
+```sh
+export CF_RELEASE_BRANCH=release-candidate
+sudo apt-get install curl
+bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/local/bootstrap.sh)
+```
+
 ### Launching Processes
 
 You can start the processes for your devbox by running the following command in the `cf_nise_installer` directory cloned by the `bootstrap.sh` script:
@@ -124,6 +134,16 @@ sudo apt-get install curl
 bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/vagrant/bootstrap.sh)
 ```
 Once the command is finished, you can target your devbox and push applications.
+
+#### For Stability
+
+cf_nise_installer uses the master branch of cf-release by default. It is sometimes unstable and does not work properly. If you want to install a stabler instance, you can choose the `release-candidate` branch by setting the `CF_RELEASE_BRANCH` environment variable.
+
+```sh
+export CF_RELEASE_BRANCH=release-candidate
+sudo apt-get install curl
+bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/vagrant/bootstrap.sh)
+```
 
 ### Updating Devbox
 
