@@ -6,6 +6,7 @@ deployment: appcloud
 jobs:
 - name: micro
   template:
+  - postgres
   - nats
   - dea_next
   - health_manager_next
