@@ -3,17 +3,7 @@
 NISE_IP_ADDRESS=${NISE_IP_ADDRESS:-192.168.10.10}
 VAGRANT_MEMORY=${VAGRANT_MEMORY:-4096}
 
-cp manifests/micro.yml manifests/deploy.yml
-
-
-if [ "${NISE_DOMAIN}" != "" ]; then
-    if (! sed --version 1>/dev/null 2>&1); then
-        # not a GNU sed
-        sed -i '' "s/${NISE_IP_ADDRESS}.xip.io/${NISE_DOMAIN}/g" manifests/deploy.yml
-    else
-        sed -i "s/${NISE_IP_ADDRESS}.xip.io/${NISE_DOMAIN}/g" manifests/deploy.yml
-    fi
-fi
+NISE_IP_ADDRESS=${NISE_IP_ADDRESS} ./common/launch_nsie_bosh.sh
 
 BRIDGE_OPTION=
 if [ ${NISE_IP_ADDRESS} != "192.168.10.10" ]; then

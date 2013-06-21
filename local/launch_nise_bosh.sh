@@ -2,11 +2,8 @@
 
 # Set current ip to nats server
 NISE_IP_ADDRESS=${NISE_IP_ADDRESS:-`ip addr | grep 'inet .*global' | cut -f 6 -d ' ' | cut -f1 -d '/' | head -n 1`}
-sed "s/192.168.10.10/${NISE_IP_ADDRESS}/g" manifests/micro.yml > manifests/deploy.yml
 
-if [ "${NISE_DOMAIN}" != "" ]; then
-    sed -i "s/${NISE_IP_ADDRESS}.xip.io/${NISE_DOMAIN}/g" manifests/deploy.yml
-fi
+NISE_IP_ADDRESS=${NISE_IP_ADDRESS} ./common/launch_nsie_bosh.sh
 
 (
     cd nise_bosh
