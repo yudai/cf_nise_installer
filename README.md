@@ -1,4 +1,4 @@
-# Cloud Foundry v2 Nise Installer
+# Cloud Foundry v2 Nise Installer (with cf-release `ea61ec6f8f`)
 
 ## Devbox Installer with Nise BOSH and nise-bosh-vagrant
 
@@ -20,12 +20,6 @@ If you want to build a devbox on a Vagrant VM, skip this section and see the nex
 * 4GB+ memory
    * m1.medium or larger instance is recommended on AWS
 
-### *NOTICE*
-
-The latest cf-release has a problem on provisioning service instances.
-
-Use the older revision `ea61ec6f8f` of cf-release by setting the `CF_RELEASE_BRANCH` environment variable or revert the revision `03af1d4` in `src/cloud_controller_ng` manually.
-
 
 ### Installing Cloud Foundry Components
 
@@ -33,22 +27,12 @@ Run the commands below on your server:
 
 ```sh
 sudo apt-get install curl
-bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/local/bootstrap.sh)
+bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/snapshot-ea61ec6f8f/local/bootstrap.sh)
 ```
 
 The `bootstrap.sh` script installs everything needed for your devbox. This command may take a couple of hours at first run.
 
 You need to restart your server once after the installation is completed.
-
-#### For Stability
-
-cf_nise_installer uses the master branch of cf-release by default. It is sometimes unstable and does not work properly. If you want to install a stabler instance, you can choose the `release-candidate` branch by setting the `CF_RELEASE_BRANCH` environment variable.
-
-```sh
-export CF_RELEASE_BRANCH=release-candidate
-sudo apt-get install curl
-bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/local/bootstrap.sh)
-```
 
 ### Launching Processes
 
@@ -108,9 +92,9 @@ You can customize your installation using environment variables.
 | Name              | Description                              | Used in                                 | Default                                        |
 | :---------------: | :--------------------------------------: | :-------------------------------------: | :--------------------------------------------: |
 | INSTALLER_URL     | URI for cf_nise_installer                | bootstrap.sh                            | https://github.com/yudai/cf_nise_installer.git |
-| INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | master                                         |
+| INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | *snapshot-ea61ec6f8f*                          |
 | CF_RELEASE_URL    | URI for cf-release | clone_cf_release.sh | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
-| CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                         |
+| CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | *ea61ec6f8f*                                   |
 | NISE_IP_ADDRESS   | IP address to bind CF components         | install.sh, register_service_tokens.sh  | Automatically detected using `ip` command      |
 | NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
 
@@ -131,19 +115,9 @@ Run the following command:
 
 ```sh
 sudo apt-get install curl
-bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/vagrant/bootstrap.sh)
+bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/snapshot-ea61ec6f8f/vagrant/bootstrap.sh)
 ```
 Once the command is finished, you can target your devbox and push applications.
-
-#### For Stability
-
-cf_nise_installer uses the master branch of cf-release by default. It is sometimes unstable and does not work properly. If you want to install a stabler instance, you can choose the `release-candidate` branch by setting the `CF_RELEASE_BRANCH` environment variable.
-
-```sh
-export CF_RELEASE_BRANCH=release-candidate
-sudo apt-get install curl
-bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/vagrant/bootstrap.sh)
-```
 
 ### Updating Devbox
 
@@ -193,9 +167,9 @@ You can customize your installation using environment variables.
 | Name              | Description                              | Used in                                 | Default                                        |
 | :---------------: | :--------------------------------------: | :-------------------------------------: | :--------------------------------------------: |
 | INSTALLER_URL     | URI for cf_nise_installer                | bootstrap.sh                            | https://github.com/yudai/cf_nise_installer.git |
-| INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | master                                         |
+| INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | *snapshot-ea61ec6f8f*                          |
 | CF_RELEASE_URL    | URI for cf-release                       | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
-| CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                        |
+| CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | *ea61ec6f8f*                                   |
 | NISE_IP_ADDRESS   | IP address for the VM. When this variable is set, the attached network will be bridged  | launch_nise_bosh.sh, register_service_tokens.sh | *nil* (192.168.10.10, not bridged) |
 | VAGRANT_MEMORY    | Memory size for the VM                   | launch_nise_bosh.sh                     | 4096                                           |
 | NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
