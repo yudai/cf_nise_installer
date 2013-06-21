@@ -5,14 +5,3 @@ applications:
   instances: 1
   url: hello.${target-base}
   path: .
-  services:
-    mysql-hello:
-      label: mysql
-      provider: core
-      version: '5.5'
-      plan: '100'
-    postgresql-hello:
-      label: postgresql
-      provider: core
-      version: '9.1'
-      plan: '100'
