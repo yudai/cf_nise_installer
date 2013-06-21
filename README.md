@@ -1,3 +1,5 @@
+This master branch is broken now. [Use a snapshot branch when you need a stable instllation](https://github.com/yudai/cf_nise_installer/tree/snapshot-ea61ec6f8f).
+
 # Cloud Foundry v2 Nise Installer
 
 ## Devbox Installer with Nise BOSH and nise-bosh-vagrant
