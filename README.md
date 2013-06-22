@@ -1,5 +1,3 @@
-This master branch is broken now. [Use a snapshot branch when you need a stable instllation](https://github.com/yudai/cf_nise_installer/tree/snapshot-ea61ec6f8f).
-
 # Cloud Foundry v2 Nise Installer
 
 ## Devbox Installer with Nise BOSH and nise-bosh-vagrant
@@ -7,6 +5,11 @@ This master branch is broken now. [Use a snapshot branch when you need a stable 
 CF Nise Installer is a set of scripts that installs a Cloud Foundry v2 instance to your single machine or Vagrant VM. You can build your own 'devbox' quickly by running a single command with this installer.
 
 CF Nise Installer is based on [cf-release](https://github.com/cloudfoundry/cf-release) by Pivotal, [Nise BOSH](http://github.com/nttlabs/nise_bosh/) by NTT Laboratory and [nise-bosh-vagrant](https://github.com/BrianMMcClain/nise-bosh-vagrant) by Brian McClain.
+
+
+### *NOTICE*
+
+The services have been removed from cf-release. [Use an older snapshot branch when you need services](https://github.com/yudai/cf_nise_installer/tree/snapshot-ea61ec6f8f).
 
 ## Building Devbox on Single Server
 
@@ -21,13 +24,6 @@ If you want to build a devbox on a Vagrant VM, skip this section and see the nex
 * 8GB+ free HDD space
 * 4GB+ memory
    * m1.medium or larger instance is recommended on AWS
-
-### *NOTICE*
-
-The latest cf-release has a problem on provisioning service instances.
-
-Use the older revision `ea61ec6f8f` of cf-release by setting the `CF_RELEASE_BRANCH` environment variable or revert the revision `03af1d4` in `src/cloud_controller_ng` manually.
-
 
 ### Installing Cloud Foundry Components
 
