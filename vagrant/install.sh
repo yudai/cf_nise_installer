@@ -24,9 +24,6 @@ gem install bundler bosh_cli cf admin-cf-plugin nise-bosh-vagrant --no-rdoc --no
 # Startup
 ./vagrant/start_processes.sh
 
-# Tokens
-./vagrant/register_service_tokens.sh
-
 set +x
 echo "Done!"
 echo "Your devbox is already working:"
