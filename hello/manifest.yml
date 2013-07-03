@@ -1,7 +1,7 @@
 ---
 applications:
 - name: hello
-  memory: 256M
+  memory: 128M
   instances: 1
-  url: hello.${target-base}
+  host: hello
   path: .
