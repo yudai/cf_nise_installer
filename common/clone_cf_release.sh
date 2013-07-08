@@ -8,8 +8,5 @@ if [ ! -d cf-release ]; then
     (
         cd cf-release
         git checkout ${CF_RELEASE_BRANCH}
-        git submodule foreach --recursive git submodule sync && git submodule update --init --recursive
-        bundle update
-        bundle exec bosh -n create release --force
     )
 fi
