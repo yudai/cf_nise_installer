@@ -7,14 +7,14 @@ jobs:
 - name: micro
   template:
   - postgres
+- name: micro_ng
+  template:
   - nats
   - dea_next
   - health_manager_next
   - uaa
   - login
   - collector
-- name: micro_ng
-  template:
   - cloud_controller_ng
   - gorouter
 
