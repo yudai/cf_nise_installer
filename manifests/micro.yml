@@ -33,9 +33,6 @@ properties:
   domain: 192.168.10.10.xip.io
   env:
 
-  cc_props: ccng
-  hm_props: health_manager_ccng
-
   ccdb:
     template: postgres
     address: 127.0.0.1
