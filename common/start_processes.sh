@@ -18,9 +18,9 @@ for process in \
     dir_server \
     health_manager_next \
     uaa \
-    uaa_vcap_registrar \
+    uaa_cf-registrar \
     login \
-    login_vcap_registrar \
+    login_cf-registrar \
     gorouter \
     collector;
 do
