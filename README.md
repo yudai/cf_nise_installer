@@ -200,16 +200,6 @@ When you installed your devbox with Vagrant, you can access your devbox only fro
 
 '[xip.io](http://xip.io/)' is a DNS service provided by 37signals that returns the IP address specified in the subdomain of FQDNs.
 
-### Service token registration
-
-To create services, you need to register tokens to UAA.
-
-With the Vagrant setup, this step is automatically done. You need to run the following command only when you installed your devbox on your local machine.
-
-```sh
-./local/register_stervice_tokens.sh
-```
-
 ## Other resources
 
 * [cf-vagrant-installer](https://github.com/Altoros/cf-vagrant-installer)
