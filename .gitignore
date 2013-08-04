@@ -1,4 +1,3 @@
 cf-release
 nise_bosh
-.ruby-version
 manifests/deploy.yml

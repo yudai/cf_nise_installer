@@ -1,5 +1,5 @@
 ---
-deployment: appcloud
+deployment: cf
 
 # String '196.168.10.10' will be replaced with the real IP address
 

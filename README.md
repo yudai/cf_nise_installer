@@ -38,10 +38,6 @@ The `bootstrap.sh` script installs everything needed for your devbox. This comma
 
 You need to restart your server once after the installation is completed.
 
-#### Trouble Shooting
-
-cf_nise_installer uses the master branch of cf-release by default. It is sometimes unstable and does not work properly. If you encounter a problem during installation, see [an issue](https://github.com/yudai/cf_nise_installer/issues/11) to find known compatibility problems.
-
 ### Launching Processes
 
 You can start the processes for your devbox by running the following command in the `cf_nise_installer` directory cloned by the `bootstrap.sh` script:
@@ -89,9 +85,15 @@ To update your existing Devbox, you can use scripts in the `local` directory. Yo
   * Runs the above scripts in order
   * Executes some additional tasks such as installing Ruby, Gems and Nise Bosh
 
-These scripts do not automatically update existing files in the `cf-release` and `nise_bosh` directories. You need to update them if needed.
 
-When run these scrips ts, be sure your are  in the `cf_nise_installer` directory, and not in `local` directory.
+When run these scrips, be sure your are  in the `cf_nise_installer` directory, and not in `local` directory.
+
+#### Notes for Updating Devbox
+
+These scripts do *not* automatically update existing files in the working directory.
+
+You need to delete the `cf_nise_installer` directory created by the `bootstrap.sh` script to apply changes on environment variables below and other modification in outer repositories such as `cf-release`. You are alwo able to manually edit files in the directory and run `install.sh` or each script required to install.
+
 
 ### Environment Variables
 
@@ -103,6 +105,7 @@ You can customize your installation using environment variables.
 | INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | master                                         |
 | CF_RELEASE_URL    | URI for cf-release | clone_cf_release.sh | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
 | CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                         |
+| CF_RELEASE_USE_HEAD | Create a dev release with the head of the branch | clone_cf_release.sh                     | no (set `yes` to enable)                        |
 | NISE_IP_ADDRESS   | IP address to bind CF components         | install.sh, register_service_tokens.sh  | Automatically detected using `ip` command      |
 | NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
 
@@ -127,17 +130,13 @@ bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/master/vag
 ```
 Once the command is finished, you can target your devbox and push applications.
 
-#### Trouble Shooting
-
-cf_nise_installer uses the master branch of cf-release by default. It is sometimes unstable and does not work properly. If you encounter a problem during installation, see [an issue](https://github.com/yudai/cf_nise_installer/issues/11) to find known compatibility problems.
-
 ### Updating Devbox
 
 To update your existing devbox, you can use scripts in the `vagrant` directory.
 
 * clone_cf_release.sh
   * Clones `cf-release` repository
-  * When the `cf-release` directory exists, does nothing.
+  * When the `cf-release` directory exists, does *nothing*.
 * launch_nise_bosh.sh
   * Launch a new Vagrant VM and executes Nise BOSH in the VM
   * Destroy the existing VM before running this script
@@ -151,8 +150,6 @@ To update your existing devbox, you can use scripts in the `vagrant` directory.
   * Required to be executed *once* after launching processes
 * install.sh
   * Runs the above scripts in order
-
-These scripts do not automatically update existing files in the `cf-release` and `nise_bosh` directories. You need to update them if needed.
 
 When run these scripts, be sure your are  in the `cf_nise_installer` directory, and not in `vagrant` directory.
 
@@ -172,6 +169,13 @@ vagrant ssh
 ./install_release.sh
 ```
 
+#### Notes for Updating Devbox
+
+These scripts do *not* automatically update existing files in the working directory.
+
+You need to delete the `cf_nise_installer` directory created by the `bootstrap.sh` script to apply changes on environment variables below and other modification in outer repositories such as `cf-release`. You are alwo able to manually edit files in the directory and run `install.sh` or each script required to install.
+
+
 ### Environment Variables
 
 You can customize your installation using environment variables.
@@ -182,6 +186,7 @@ You can customize your installation using environment variables.
 | INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | master                                         |
 | CF_RELEASE_URL    | URI for cf-release                       | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
 | CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                        |
+| CF_RELEASE_USE_HEAD | Create a dev release with the head of the branch | clone_cf_release.sh                     | no (set `yes` to enable)                        |
 | NISE_IP_ADDRESS   | IP address for the VM. When this variable is set, the attached network will be bridged  | launch_nise_bosh.sh, register_service_tokens.sh | *nil* (192.168.10.10, not bridged) |
 | VAGRANT_MEMORY    | Memory size for the VM                   | launch_nise_bosh.sh                     | 4096                                           |
 | NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |

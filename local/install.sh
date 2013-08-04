@@ -23,10 +23,10 @@ if [ ! -d ~/.rbenv ]; then
     echo 'eval "$(rbenv init -)"' >> ~/.profile
 fi
 . ~/.profile
-if ! (rbenv versions | grep -q 1.9.3-p392); then
-    rbenv install 1.9.3-p392
+if ! (rbenv versions | grep -q 1.9.3-p448); then
+    rbenv install 1.9.3-p448
 fi
-rbenv local 1.9.3-p392
+rbenv local 1.9.3-p448
 
 # BOSH CLI and CF commands
 gem install bundler cf admin-cf-plugin --no-rdoc --no-ri
