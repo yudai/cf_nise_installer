@@ -7,8 +7,8 @@ if ! (which git > /dev/null); then
 fi
 
 # Check Ruby
-if ! (which ruby > /dev/null && ruby --version | grep "1.9.3p392" -q); then
-    echo "Ruby 1.9.3p392 not found"
+if ! (which ruby > /dev/null && ruby --version | grep "1.9.3p448" -q); then
+    echo "Ruby 1.9.3p448 not found"
     exit 1
 fi
 
