@@ -10,7 +10,7 @@ if [ ! -d cf-release ]; then
     git clone ${CF_RELEASE_URL}
     (
         cd cf-release
-        git checkout ${CF_RELEASE_BRANCH}
+        git checkout -f ${CF_RELEASE_BRANCH}
 
         if [ $CF_RELEASE_USE_HEAD != "no" ]; then
             ./update
