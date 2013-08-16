@@ -13,7 +13,7 @@ if ! (which ruby > /dev/null && ruby --version | grep "1.9.3p448" -q); then
 fi
 
 # Gems
-gem install bundler cf admin-cf-plugin nise-bosh-vagrant --no-rdoc --no-ri
+gem install bundler cf nise-bosh-vagrant --no-rdoc --no-ri
 
 # cf-release
 ./vagrant/clone_cf_release.sh

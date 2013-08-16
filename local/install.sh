@@ -29,7 +29,7 @@ fi
 rbenv local 1.9.3-p448
 
 # BOSH CLI and CF commands
-gem install bundler cf admin-cf-plugin --no-rdoc --no-ri
+gem install bundler cf --no-rdoc --no-ri
 rbenv rehash
 
 # cf-release
