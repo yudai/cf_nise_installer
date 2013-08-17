@@ -149,6 +149,9 @@ properties:
   health_manager_ccng:
     shadow_mode: disable
     cc_partition: ng
+# adding the following to line up with the latest (8/15/2013) CF code
+  hm_props:
+    cc_partition: ng
 
   uaa:
     cc:
