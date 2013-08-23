@@ -145,6 +145,7 @@ properties:
     memory_mb: 2048
     disk_mb: 8192
     num_instances: 16
+    directory_server_protocol: http
 
   health_manager_ccng:
     shadow_mode: disable

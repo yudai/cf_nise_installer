@@ -6,6 +6,10 @@ CF Nise Installer is a set of scripts that installs a Cloud Foundry v2 instance 
 
 CF Nise Installer is based on [cf-release](https://github.com/cloudfoundry/cf-release) by Pivotal, [Nise BOSH](http://github.com/nttlabs/nise_bosh/) by NTT Laboratory and [nise-bosh-vagrant](https://github.com/BrianMMcClain/nise-bosh-vagrant) by Brian McClain.
 
+### *NOTICE*
+
+This installer is mainly for testing installation with BOSH. If you just want to try Cloud Foundry, [cf-vagrant-installer](https://github.com/Altoros/cf-vagrant-installer) may be a better solution for you.
+
 
 ### *NOTICE*
 
