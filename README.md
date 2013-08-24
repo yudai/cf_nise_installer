@@ -202,8 +202,8 @@ You can target and login to your installed devbox using following values:
 
 | Target URI     | api.\<IP Address\>.xip.io | api.192.168.10.10.xip.io |
 | :------------: | :-----------------------: | :----------------------: |
-| Admin User     | micro@vcap.me             | <-                       |
-| Admin Password | micr0@micr0               | <-                       |
+| Admin User     | admin                     | <-                       |
+| Admin Password | c1oudc0w                  | <-                       |
 
 When you installed your devbox with Vagrant, you can access your devbox only from the host machine that runs the VM.
 

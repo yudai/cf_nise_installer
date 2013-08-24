@@ -13,16 +13,14 @@ do
 done;
 
 for process in \
-    warden \
-    dea_next \
-    dir_server \
+    nginx_ccng \
+    gorouter \
     health_manager_next \
     uaa \
     uaa_cf-registrar \
-    login \
-    login_cf-registrar \
-    gorouter \
-    collector;
+    warden \
+    dea_next \
+    dir_server;
 do
     sudo /var/vcap/bosh/bin/monit start $process
     sleep 5
