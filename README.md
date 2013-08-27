@@ -11,10 +11,6 @@ CF Nise Installer is based on [cf-release](https://github.com/cloudfoundry/cf-re
 This installer is mainly for testing installation with BOSH. If you just want to try Cloud Foundry, [cf-vagrant-installer](https://github.com/Altoros/cf-vagrant-installer) may be a better solution for you.
 
 
-### *NOTICE*
-
-The services have been removed from cf-release. [Use an older snapshot branch when you need services](https://github.com/yudai/cf_nise_installer/tree/snapshot-ea61ec6f8f).
-
 ## Building Devbox on Single Server
 
 This section shows you how to install CF components to your server.
@@ -202,8 +198,8 @@ You can target and login to your installed devbox using following values:
 
 | Target URI     | api.\<IP Address\>.xip.io | api.192.168.10.10.xip.io |
 | :------------: | :-----------------------: | :----------------------: |
-| Admin User     | micro@vcap.me             | <-                       |
-| Admin Password | micr0@micr0               | <-                       |
+| Admin User     | admin                     | <-                       |
+| Admin Password | c1oudc0w                  | <-                       |
 
 When you installed your devbox with Vagrant, you can access your devbox only from the host machine that runs the VM.
 

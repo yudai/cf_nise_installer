@@ -28,4 +28,4 @@ set +x
 echo "Done!"
 echo "Your devbox is already working:"
 echo "CF target: 'cf target api.${NISE_IP_ADDRESS:=192.168.10.10}.xip.io'"
-echo "CF login : 'cf login --password micr0@micr0 micro@vcap.me'"
+echo "CF login : 'cf login --password c1oudc0w admin'"
