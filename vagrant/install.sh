@@ -27,5 +27,5 @@ gem install bundler cf nise-bosh-vagrant --no-rdoc --no-ri
 set +x
 echo "Done!"
 echo "Your devbox is already working:"
-echo "CF target: 'cf target api.${NISE_IP_ADDRESS:=192.168.10.10}.xip.io'"
+echo "CF target: 'cf target http://api.${NISE_DOMAIN:-${NISE_IP_ADDRESS:-192.168.10.10}.xip.io}'"
 echo "CF login : 'cf login --password c1oudc0w admin'"
