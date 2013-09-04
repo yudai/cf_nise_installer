@@ -1,5 +1,11 @@
 #!/bin/bash -ex
 
+# Detect RVM
+if (rvm >/dev/null 2>&1); then
+    echo "Found RVM is installed! RVM is not supported by this installer. Remove it and rerun this script."
+    exit 1
+fi
+
 # Git bootstrap
 if ! (which git); then
     sudo apt-get update

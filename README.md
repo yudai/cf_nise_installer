@@ -21,6 +21,7 @@ If you want to build a devbox on a Vagrant VM, skip this section and see the nex
 
 * Ubuntu 10.04 64bit
    * *Ubuntu 12.04 is not supported*
+   * Do NOT install RVM to avoid conflicting with RBenv
 * 8GB+ free HDD space
 * 4GB+ memory
    * m1.medium or larger instance is recommended on AWS
