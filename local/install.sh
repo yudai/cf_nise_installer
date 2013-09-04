@@ -46,4 +46,4 @@ NISE_IP_ADDRESS=${NISE_IP_ADDRESS:-`ip addr | grep 'inet .*global' | cut -f 6 -d
 echo "Done!"
 echo "RESTART your server!"
 echo "CF target: 'cf target http://api.${NISE_DOMAIN:-${NISE_IP_ADDRESS}.xip.io}'"
-echo "CF login : 'cf login --password c1oudc0w admin'"
+echo "CF login : 'cf login --password ${NISE_PASSWORD:-c1oudc0w} admin'"
