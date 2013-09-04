@@ -10,3 +10,12 @@ if [ "${NISE_DOMAIN}" != "" ]; then
         sed -i "s/${NISE_IP_ADDRESS}.xip.io/${NISE_DOMAIN}/g" manifests/deploy.yml
     fi
 fi
+
+if [ "${NISE_PASSWORD}" != "" ]; then
+    if (! sed --version 1>/dev/null 2>&1); then
+        # not a GNU sed
+        sed -i '' "s/c1oudc0w/${NISE_PASSWORD}/g" manifests/deploy.yml
+    else
+        sed -i "s/c1oudc0w/${NISE_PASSWORD}/g" manifests/deploy.yml
+    fi
+fi
