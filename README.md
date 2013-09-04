@@ -105,9 +105,10 @@ You can customize your installation using environment variables.
 | INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | master                                         |
 | CF_RELEASE_URL    | URI for cf-release | clone_cf_release.sh | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
 | CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                         |
-| CF_RELEASE_USE_HEAD | Create a dev release with the head of the branch | clone_cf_release.sh                     | no (set `yes` to enable)                        |
+| CF_RELEASE_USE_HEAD | Create a dev release with the head of the branch | clone_cf_release.sh           | no (set `yes` to enable)                       |
 | NISE_IP_ADDRESS   | IP address to bind CF components         | install.sh, register_service_tokens.sh  | Automatically detected using `ip` command      |
 | NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
+| NISE_PASSWORD     | Password for CF components               | install.sh, launch_nise_bosh.sh         | c1oudc0w                                       |
 
 ## Build Devbox with Vagrant
 
@@ -190,6 +191,7 @@ You can customize your installation using environment variables.
 | NISE_IP_ADDRESS   | IP address for the VM. When this variable is set, the attached network will be bridged  | launch_nise_bosh.sh, register_service_tokens.sh | *nil* (192.168.10.10, not bridged) |
 | VAGRANT_MEMORY    | Memory size for the VM                   | launch_nise_bosh.sh                     | 4096                                           |
 | NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
+| NISE_PASSWORD     | Password for CF components               | install.sh, launch_nise_bosh.sh         | c1oudc0w                                       |
 
 ## Playing with installed Devbox
 
