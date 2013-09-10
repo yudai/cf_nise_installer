@@ -5,7 +5,7 @@ VAGRANT_MEMORY=${VAGRANT_MEMORY:-4096}
 
 NISE_IP_ADDRESS=${NISE_IP_ADDRESS} ./common/launch_nsie_bosh.sh
 
-BRIDGE_OPTION=
+BRIDGE_OPTION="--address=${NISE_IP_ADDRESS}"
 if [ ${NISE_IP_ADDRESS} != "192.168.10.10" ]; then
     BRIDGE_OPTION="--bridge --address=${NISE_IP_ADDRESS}"
 fi
