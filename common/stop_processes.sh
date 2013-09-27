@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 sudo /var/vcap/bosh/bin/monit
 sleep 5
