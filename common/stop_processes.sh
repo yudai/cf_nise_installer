@@ -4,6 +4,7 @@ sudo /var/vcap/bosh/bin/monit
 sleep 5
 
 for process in \
+    cloud_controller_jobs \
     nginx_ccng \
     gorouter \
     health_manager_next \

@@ -13,6 +13,7 @@ do
 done;
 
 for process in \
+    cloud_controller_jobs \
     nginx_ccng \
     gorouter \
     health_manager_next \
