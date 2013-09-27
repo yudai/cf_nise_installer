@@ -10,6 +10,10 @@ CF Nise Installer is based on [cf-release](https://github.com/cloudfoundry/cf-re
 
 This installer is mainly for testing installation with BOSH. If you just want to try Cloud Foundry, [cf-vagrant-installer](https://github.com/Altoros/cf-vagrant-installer) may be a better solution for you.
 
+### Services
+
+You can add services to a CF instance created by this installer using [cf_nise_installer_services](https://github.com/yudai/cf_nise_installer_services). Currently only postgresql is available.
+
 
 ## Building Devbox on Single Server
 
