@@ -7,9 +7,13 @@ if (rvm >/dev/null 2>&1); then
 fi
 
 # Git bootstrap
-if ! (which git); then
-    sudo apt-get update
-    sudo apt-get install -y git-core
+if  ( ! which git || [ `git --version | awk '{print $3}'` = "1.7.0.4" ] ); then
+    (
+        # using a newer git
+        sudo add-apt-repository ppa:git-core/ppa
+        sudo apt-get update
+        sudo apt-get -y install git
+    )
 fi
 
 # Nise BOSH
