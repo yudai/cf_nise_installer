@@ -17,6 +17,9 @@ if  ( ! which git || [ `git --version | awk '{print $3}'` = "1.7.0.4" ] ); then
     )
 fi
 
+# required to compile a gem native extension of CCNG
+sudo apt-get -y install libmysqlclient-dev libpq-dev libsqlite3-dev
+
 # Nise BOSH
 if [ ! -d nise_bosh ]; then
     git clone https://github.com/nttlabs/nise_bosh.git
