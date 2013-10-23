@@ -108,7 +108,7 @@ properties:
 
   cc: &cc
     logging_level: debug
-    external_host: ccng
+    external_host: api
     srv_api_uri: http://api.192.168.10.10.xip.io
     cc_partition: default
     db_encryption_key: c1oudc0w
