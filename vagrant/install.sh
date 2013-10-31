@@ -19,7 +19,7 @@ gem install bundler cf nise-bosh-vagrant --no-rdoc --no-ri
 ./vagrant/clone_cf_release.sh
 
 # Install and start
-./vagrant/launch_nise_bosh.sh
+NISE_BOSH_REV=$NISE_BOSH_REV ./vagrant/launch_nise_bosh.sh
 
 # Startup
 ./vagrant/start_processes.sh

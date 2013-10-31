@@ -114,6 +114,9 @@ You can customize your installation using environment variables.
 | NISE_IP_ADDRESS   | IP address to bind CF components         | install.sh, register_service_tokens.sh  | Automatically detected using `ip` command      |
 | NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
 | NISE_PASSWORD     | Password for CF components               | install.sh, launch_nise_bosh.sh         | c1oudc0w                                       |
+| NISE_BOSH_REV     | Git revision specifier [note] of nise_bosh repo | install.sh, launch_nise_bosh.sh  | *nil* (currently checked-out revision)         |
+
+[note]: Do *not* use any relative revision specifier from HEAD (e.g. `HEAD~`, `HEAD~10`, `HEAD^^`). Please use an absolute revision specifier (e.g. `123abc`, `develop`). You may use a relative revision specifier from an absolute revision specifier (e.g. `master~~`).
 
 ## Build Devbox with Vagrant
 

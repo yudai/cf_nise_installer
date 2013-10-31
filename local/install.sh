@@ -26,6 +26,10 @@ if [ ! -d nise_bosh ]; then
 fi
 (
     cd nise_bosh
+    if [ "" != "$NISE_BOSH_REV" ]; then
+        git checkout $NISE_BOSH_REV
+    fi
+    echo Use nise_bosh of revision: `git rev-list --max-count=1 HEAD` in $0
     sudo ./bin/init
 )
 
@@ -50,7 +54,7 @@ rbenv rehash
 ./local/clone_cf_release.sh
 
 # Run
-./local/launch_nise_bosh.sh
+NISE_BOSH_REV=$NISE_BOSH_REV ./local/launch_nise_bosh.sh
 
 # Postinstall
 ./local/postinstall.sh
