@@ -4,6 +4,7 @@ sudo /var/vcap/bosh/bin/monit
 sleep 5
 
 for process in \
+    nats_stream_forwarder \
     cloud_controller_jobs \
     nginx_ccng \
     gorouter \

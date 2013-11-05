@@ -13,6 +13,7 @@ do
 done;
 
 for process in \
+    nats_stream_forwarder \
     cloud_controller_jobs \
     nginx_ccng \
     gorouter \
