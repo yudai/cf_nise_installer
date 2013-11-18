@@ -28,7 +28,7 @@ properties:
     management: default
 
   nats:
-    address: 192.168.10.10
+    machines: [192.168.10.10]
     port: 4222
     user: nats
     password: c1oudc0w
