@@ -22,22 +22,19 @@ done
 
 echo "Waiting for all processes but postgres to stop"
 for ((i=0; i < 24; i++)); do
-    COUNT=$(sudo /var/vcap/bosh/bin/monit summary | tail -n +3 | grep -c -E "stop pending$")
-    if [ $COUNT == 0 ]; then
+    if (sudo /var/vcap/bosh/bin/monit summary | tail -n +3 | grep -c -E "stop pending$" > /dev/null); then
         break
     fi
     sleep 5
 done
 
-COUNT=$(sudo /var/vcap/bosh/bin/monit summary | tail -n +3 | grep -c -E "stop pending$")
-if [ $COUNT != 0 ]; then
+if (sudo /var/vcap/bosh/bin/monit summary | tail -n +3 | grep -c -E "stop pending$" > /dev/null); then
   echo "Unable to stop processes"
-else 
+else
   echo "Now stopping postgres..."
   sudo /var/vcap/bosh/bin/monit stop postgres
   for ((i=0; i < 12; i++)); do
-    COUNT=$(sudo /var/vcap/bosh/bin/monit summary | tail -n +3 | grep -c -E "stop pending$")
-    if [ $COUNT == 0 ]; then
+    if (sudo /var/vcap/bosh/bin/monit summary | tail -n +3 | grep -c -E "stop pending$" > /dev/null); then
         break
     fi
     sleep 5
