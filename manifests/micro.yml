@@ -29,6 +29,7 @@ properties:
 
   nats:
     machines: [192.168.10.10]
+    address: 192.168.10.10
     port: 4222
     user: nats
     password: c1oudc0w
