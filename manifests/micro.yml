@@ -10,6 +10,7 @@ jobs:
 - name: micro_ng
   template:
   - nats
+  - nats_stream_forwarder
   - health_manager_next
   - uaa
   - cloud_controller_ng
