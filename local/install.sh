@@ -6,17 +6,6 @@ if (rvm >/dev/null 2>&1); then
     exit 1
 fi
 
-# Git bootstrap
-if  ( ! which git || [ `git --version | awk '{print $3}'` = "1.7.0.4" ] ); then
-    (
-        # using a newer git
-        sudo apt-get -y install python-software-properties
-        sudo add-apt-repository ppa:git-core/ppa
-        sudo apt-get update
-        sudo apt-get -y install git
-    )
-fi
-
 # required to compile a gem native extension of CCNG
 sudo apt-get -y install libmysqlclient-dev libpq-dev libsqlite3-dev
 
