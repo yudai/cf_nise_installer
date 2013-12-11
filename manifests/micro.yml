@@ -11,7 +11,7 @@ jobs:
   template:
   - nats
   - nats_stream_forwarder
-  - health_manager_next
+  - hm9000
   - uaa
   - cloud_controller_ng
   - gorouter

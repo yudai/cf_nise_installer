@@ -8,7 +8,14 @@ for process in \
     cloud_controller_jobs \
     nginx_ccng \
     gorouter \
-    health_manager_next \
+    hm9000_listener \
+    hm9000_fetcher \
+    hm9000_analyzer \
+    hm9000_sender \
+    hm9000_metrics_server \
+    hm9000_api_server \
+    hm9000_evacuator \
+    hm9000_shredder \
     uaa \
     uaa_cf-registrar \
     warden \
