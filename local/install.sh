@@ -10,15 +10,9 @@ fi
 sudo apt-get -y install libmysqlclient-dev libpq-dev libsqlite3-dev
 
 # Nise BOSH
-if [ ! -d nise_bosh ]; then
-    git clone https://github.com/nttlabs/nise_bosh.git
-fi
+./local/clone_nise_bosh.sh
 (
     cd nise_bosh
-    if [ "" != "$NISE_BOSH_REV" ]; then
-        git checkout $NISE_BOSH_REV
-    fi
-    echo Use nise_bosh of revision: `git rev-list --max-count=1 HEAD` in $0
     sudo ./bin/init
 )
 

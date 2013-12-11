@@ -13,7 +13,7 @@ NISE_IP_ADDRESS=${NISE_IP_ADDRESS} ./common/launch_nise_bosh.sh
     echo Use nise_bosh of revision: `git rev-list --max-count=1 HEAD` in $0
     bundle install
     # Old spec format
-    sudo env PATH=$PATH bundle exec ./bin/nise-bosh -y ../cf-release ../manifests/deploy.yml micro -n ${NISE_IP_ADDRESS}
+    sudo env PATH=$PATH bundle exec ./bin/nise-bosh -y ../cf-release ../.deploy.yml micro -n ${NISE_IP_ADDRESS}
     # New spec format, keeping the  monit files installed in the previous run
-    sudo env PATH=$PATH bundle exec ./bin/nise-bosh --keep-monit-files -y ../cf-release ../manifests/deploy.yml micro_ng -n ${NISE_IP_ADDRESS}
+    sudo env PATH=$PATH bundle exec ./bin/nise-bosh --keep-monit-files -y ../cf-release ../.deploy.yml micro_ng -n ${NISE_IP_ADDRESS}
 )

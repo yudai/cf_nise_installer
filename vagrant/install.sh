@@ -6,6 +6,9 @@ if ! (which git > /dev/null); then
     exit 1
 fi
 
+# Nise BOSH
+./vagrant/clone_nise_bosh.sh
+
 # Check Ruby
 if ! (which ruby > /dev/null && ruby --version | grep "1.9.3p448" -q); then
     echo "Ruby 1.9.3p448 not found"
