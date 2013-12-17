@@ -28,9 +28,6 @@ properties:
     apps: default
     management: default
 
-  etcd_ips: [192.168.10.10]
-  leader_ip: 192.168.10.10
-
   nats:
     machines: [192.168.10.10]
     address: 192.168.10.10
