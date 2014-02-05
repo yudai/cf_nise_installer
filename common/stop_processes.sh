@@ -3,27 +3,7 @@
 sudo /var/vcap/bosh/bin/monit
 sleep 5
 
-for process in \
-    nats_stream_forwarder \
-    cloud_controller_jobs \
-    nginx_ccng \
-    gorouter \
-    hm9000_listener \
-    hm9000_fetcher \
-    hm9000_analyzer \
-    hm9000_sender \
-    hm9000_metrics_server \
-    hm9000_api_server \
-    hm9000_evacuator \
-    hm9000_shredder \
-    uaa \
-    uaa_cf-registrar \
-    warden \
-    dea_next \
-    dir_server \
-    cloud_controller_ng \
-    nats;
-do
+for process in `sudo /var/vcap/bosh/bin/monit summary | tail -n +3 | cut -d ' ' -f 2 | sed "s/'//g" | grep -v postgres`; do
     sudo /var/vcap/bosh/bin/monit stop $process
 done
 
