@@ -13,7 +13,7 @@ if [ ! -d cf-release ]; then
         git checkout -f ${CF_RELEASE_BRANCH}
 
         if [ $CF_RELEASE_USE_HEAD != "no" ]; then
-            ./update
+            git submodule update --init --recursive
             RBENV_VERSION=$ruby_version bundle install
             RBENV_VERSION=$ruby_version bundle exec bosh -n create release --force
         fi
