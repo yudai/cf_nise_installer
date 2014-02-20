@@ -26,3 +26,5 @@ if (sudo /var/vcap/bosh/bin/monit summary | tail -n +3 | grep -v -E "running$");
     echo "Found process failed to start"
     exit 1
 fi
+
+echo "All processes have been started!"

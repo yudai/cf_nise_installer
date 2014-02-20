@@ -1,3 +1,4 @@
 cf-release
 nise_bosh
 .deploy.yml
+.vagrant

@@ -122,100 +122,22 @@ You can customize your installation using environment variables.
 
 ## Build Devbox with Vagrant
 
-You can create a devbox VM quickly with Vagrant and [nise-bosh-vagrant](https://github.com/BrianMMcClain/nise-bosh-vagrant).
+You can create a devbox VM quickly with a VM using Vagrant.
 
 #### Requirements
 
-* Vagrant 1.2 or later
+* Vagrant 1.4 or later
 * Ruby 1.9.3-p448 (Required by cf-release)
 * 8GB+ free HDD space
-* 4GB+ free memory
+* 2GB+ free memory
 
-### Launch Vagrant VM with CF components
+### Launch Vagrant VM
 
-Run the following command:
-
-```sh
-sudo apt-get install curl
-bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/${INSTALLER_BRANCH:-master}/vagrant/bootstrap.sh)
-```
-Once the command is finished, you can target your devbox and push applications.
-
-### Updating Devbox
-
-To update your existing devbox, you can use scripts in the `vagrant` directory.
-
-* clone_cf_release.sh
-  * Clones `cf-release` repository
-  * When the `cf-release` directory exists, does *nothing*.
-* launch_nise_bosh.sh
-  * Launch a new Vagrant VM and executes Nise BOSH in the VM
-  * Destroy the existing VM before running this script
-* postinstall.sh
-  * Runs some commands to work the CF instance properly
-  * Required to be executed after the `launch_nise_bosh.sh`
-* start_processes.sh
-  * Invokes the Monit process and CF processes
-* register_service_tokens.sh
-  * Registers required tokens for services
-  * Required to be executed *once* after launching processes
-* install.sh
-  * Runs the above scripts in order
-
-When run these scripts, be sure your are  in the `cf_nise_installer` directory, and not in `vagrant` directory.
-
-You can destroy your existing VM and delete generated files with the following commands:
+Clone this repository and run the command below.
 
 ```sh
-cd cf-release
-vagrant destroy && rm -rf .nise-bosh-* Vagrantfile .vagrant
+vagrant up
 ```
-
-When you want to update CF components without rebuilding your VM itself, you can SSH into your VM and re-run the Nise BOSH.
-
-```
-cd cf-release
-vagrant ssh
-# in the VM
-./install_release.sh
-```
-
-#### Notes for Updating Devbox
-
-These scripts do *not* automatically update existing files in the working directory.
-
-You need to delete the `cf_nise_installer` directory created by the `bootstrap.sh` script to apply changes on environment variables below and other modification in outer repositories such as `cf-release`. You are alwo able to manually edit files in the directory and run `install.sh` or each script required to install.
-
-
-### Environment Variables
-
-You can customize your installation using environment variables.
-
-| Name              | Description                              | Used in                                 | Default                                        |
-| :---------------: | :--------------------------------------: | :-------------------------------------: | :--------------------------------------------: |
-| INSTALLER_URL     | URI for cf_nise_installer                | bootstrap.sh                            | https://github.com/yudai/cf_nise_installer.git |
-| INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | master                                         |
-| CF_RELEASE_URL    | URI for cf-release                       | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
-| CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                        |
-| CF_RELEASE_USE_HEAD | Create a dev release with the head of the branch | clone_cf_release.sh                     | no (set `yes` to enable)                        |
-| NISE_IP_ADDRESS   | IP address for the VM. When this variable is set, the attached network will be bridged  | launch_nise_bosh.sh, register_service_tokens.sh | *nil* (192.168.10.10, not bridged) |
-| VAGRANT_MEMORY    | Memory size for the VM                   | launch_nise_bosh.sh                     | 4096                                           |
-| NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
-| NISE_PASSWORD     | Password for CF components               | install.sh, launch_nise_bosh.sh         | c1oudc0w                                       |
-
-## Playing with installed Devbox
-
-You can target and login to your installed devbox using following values:
-
-
-| Target URI     | api.\<IP Address\>.xip.io | api.192.168.10.10.xip.io |
-| :------------: | :-----------------------: | :----------------------: |
-| Admin User     | admin                     | <-                       |
-| Admin Password | c1oudc0w                  | <-                       |
-
-When you installed your devbox with Vagrant, you can access your devbox only from the host machine that runs the VM.
-
-'[xip.io](http://xip.io/)' is a DNS service provided by 37signals that returns the IP address specified in the subdomain of FQDNs.
 
 ## Other resources
 

@@ -7,7 +7,8 @@ if (rvm >/dev/null 2>&1); then
 fi
 
 # required to compile a gem native extension of CCNG
-sudo apt-get -y install libmysqlclient-dev libpq-dev libsqlite3-dev
+sudo apt-get update
+sudo apt-get -y install git-core libmysqlclient-dev libpq-dev libsqlite3-dev
 
 # Nise BOSH
 ./local/clone_nise_bosh.sh
