@@ -139,6 +139,7 @@ properties:
         non_basic_services_allowed: true
         total_routes: 1000
         trial_db_allowed: true
+    hm9000_noop: false
 
   ccng: *cc
 
