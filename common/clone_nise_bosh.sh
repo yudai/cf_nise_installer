@@ -1,8 +1,6 @@
 #!/bin/bash -ex
 
-if [ ! -d nise_bosh ]; then
-    git clone https://github.com/nttlabs/nise_bosh.git
-fi
+git submodule update --init --recursive
 (
     cd nise_bosh
     if [ "" != "$NISE_BOSH_REV" ]; then

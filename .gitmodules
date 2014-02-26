@@ -1,0 +1,3 @@
+[submodule "nise_bosh"]
+	path = nise_bosh
+	url = https://github.com/nttlabs/nise_bosh

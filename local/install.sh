@@ -17,6 +17,7 @@ sudo apt-get -y install git-core libmysqlclient-dev libpq-dev libsqlite3-dev
     sudo ./bin/init
 )
 
+
 # Ruby
 if [ ! -d ~/.rbenv ]; then
     git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
