@@ -1,2 +1,2 @@
-.deploy.yml
+manifests/deploy.yml
 .vagrant
