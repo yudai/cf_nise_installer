@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-if [ ! -d nise_bosh ]; then
+if [ ! "$(ls -A nise_bosh)" ]; then
     git submodule update --init --recursive nise_bosh
 
 
@@ -14,5 +14,5 @@ if [ ! -d nise_bosh ]; then
         echo "Using Nise BOSH revision: `git rev-list --max-count=1 HEAD`"
     )
 else
-    echo "'nise_bosh' directory exists. Skipping cloning..."
+    echo "'nise_bosh' directory is not empty. Skipping cloning..."
 fi

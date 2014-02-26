@@ -50,7 +50,7 @@ You need to restart your server once after the installation is completed.
 You can start the processes for your devbox by running the following command in the `cf_nise_installer` directory cloned by the `bootstrap.sh` script:
 
 ```sh
-./scripts/start_processes.sh
+./scripts/start.sh
 ```
 
 This command launches the Monit process and then start up all monit jobs installed by Nise BOSH.
@@ -75,29 +75,31 @@ Confirm all the processes shown by `monit summary` indicate `running`. It takes 
 
 To update your existing Devbox, you can use scripts in the `scripts` directory. You don't need to execute the `bootstrap.sh` script for this purpose.
 
-* clone_cf_release.sh
-  * Clones `cf-release` repository
-  * When the `cf-release` directory exists, does nothing.
-* launch_nise_bosh.sh
-  * Executes Nise BOSH and update installation
-* postinstall.sh
-  * Runs some commands to work the CF instance properly
-  * Required to be executed after the `launch_nise_bosh.sh`
-* start_processes.sh
-  * Invokes the Monit process and CF processes
-* register_service_tokens.sh
-  * Registers required tokens for services
-  * Required to be executed *once* after launching processes
 * install.sh
-  * Runs the above scripts in order
-  * Executes some additional tasks such as installing Ruby, Gems and Nise Bosh
+  * Runs the following scripts in order
+* install_ruby.sh
+  * Installs Ruby binaries with Rbenv
+* clone_nise_bosh.sh
+  * Clones the `nise_bosh` repository
+  * When the `nise_bosh` directory is not empty, does nothing.
+* clone_cf_release.sh
+  * Clones the `cf-release` repository
+  * When the `cf-release` directory is not empty, does nothing.
+* install_environemnt.sh
+  * Run the `init` command of Nise BOSH
+* install_cf_release.sh
+  * Installs cf-release jobs and packages with Nise BOSH
 
+* start.sh
+  * Invokes the Monit process and CF processes
+* stop.sh
+  * Stop all CF processes
 
-When run these scrips, be sure your are  in the `cf_nise_installer` directory, and not in `scripts` directory.
+When run these scrips, be sure your are in the `cf_nise_installer` directory, and not in `scripts` directory.
 
 #### Notes for Updating Devbox
 
-These scripts do *not* automatically update existing files in the working directory.
+These scripts do *not* automatically update existing files in the working directory such as the `cf-release` and `nise_bosh` directories.
 
 You need to delete the `cf_nise_installer` directory created by the `bootstrap.sh` script to apply changes on environment variables below and other modification in outer repositories such as `cf-release`. You are alwo able to manually edit files in the directory and run `install.sh` or each script required to install.
 
@@ -110,13 +112,13 @@ You can customize your installation using environment variables.
 | :---------------: | :--------------------------------------: | :-------------------------------------: | :--------------------------------------------: |
 | INSTALLER_URL     | URI for cf_nise_installer                | bootstrap.sh                            | https://github.com/yudai/cf_nise_installer.git |
 | INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | master                                         |
-| CF_RELEASE_URL    | URI for cf-release | clone_cf_release.sh | clone_cf_release.sh                     | https://github.com/cloudfoundry/cf-release.git |
-| CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | master                                         |
+| CF_RELEASE_URL    | URI for cf-release | clone_cf_release.sh | clone_cf_release.sh                     | *nil* (https://github.com/cloudfoundry/cf-release.git is set to submodule)|
+| CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | *nil* (certain stable revision is set to submodule) |
 | CF_RELEASE_USE_HEAD | Create a dev release with the head of the branch | clone_cf_release.sh           | no (set `yes` to enable)                       |
-| NISE_IP_ADDRESS   | IP address to bind CF components         | install.sh, register_service_tokens.sh  | Automatically detected using `ip` command      |
-| NISE_DOMAIN       | Domain name for the devbox               | launch_nise_bosh.sh                     | *nil* (<ip_address>.xip.io)                    |
-| NISE_PASSWORD     | Password for CF components               | install.sh, launch_nise_bosh.sh         | c1oudc0w                                       |
-| NISE_BOSH_REV     | Git revision specifier [note] of nise_bosh repo | install.sh, launch_nise_bosh.sh  | *nil* (currently checked-out revision)         |
+| NISE_BOSH_REV     | Git revision specifier [note] of nise_bosh repo | clone_nise_bosh.sh               | *nil* (currently checked-out revision)         |
+| NISE_IP_ADDRESS   | IP address to bind CF components         | install_cf_release.sh                   | Automatically detected using `ip` command      |
+| NISE_DOMAIN       | Domain name for the devbox               | install_cf_release.sh                   | *nil* (<ip_address>.xip.io)                    |
+| NISE_PASSWORD     | Password for CF components               | install_cf_release.sh                   | c1oudc0w                                       |
 
 [note]: Do *not* use any relative revision specifier from HEAD (e.g. `HEAD~`, `HEAD~10`, `HEAD^^`). Please use an absolute revision specifier (e.g. `123abc`, `develop`). You may use a relative revision specifier from an absolute revision specifier (e.g. `master~~`).
 
@@ -138,3 +140,5 @@ Clone this repository and run the command below.
 ```sh
 vagrant up
 ```
+
+Your working directory will be mount at `/vagrant`.

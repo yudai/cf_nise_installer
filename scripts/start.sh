@@ -27,4 +27,10 @@ if (sudo /var/vcap/bosh/bin/monit summary | tail -n +3 | grep -v -E "running$");
     exit 1
 fi
 
+set +x
 echo "All processes have been started!"
+api_url=`grep srv_api_uri: ./manifests/deploy.yml | awk '{ print $2 }'`
+password=`grep ' - admin' ./manifests/deploy.yml | cut -f 2 -d '|'  `
+echo "Target: 'cf target ${api_url}'"
+echo "Login : 'cf login --password ${password} admin'"
+echo "Note  : Create an organization before creating a space with `cf create-org`"
