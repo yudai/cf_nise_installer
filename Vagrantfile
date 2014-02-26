@@ -2,6 +2,7 @@ require './.vagrant-provision-reboot-plugin'
 
 Vagrant.configure("2") do |config|
   config.vm.box = "lucid64"
+  config.vm.box_url = "http://files.vagrantup.com/lucid64.box"
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
