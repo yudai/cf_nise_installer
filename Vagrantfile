@@ -9,12 +9,12 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision :shell do |shell|
-    shell.inline = 'cd /vagrant && ./local/install.sh'
+    shell.inline = 'cd /vagrant && ./scripts/install.sh'
     shell.privileged = false
   end
   config.vm.provision :unix_reboot
   config.vm.provision :shell do |shell|
-    shell.inline = 'cd /vagrant && ./local/start_processes.sh'
+    shell.inline = 'cd /vagrant && ./scripts/start_processes.sh'
   end
 
 end

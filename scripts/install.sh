@@ -11,12 +11,11 @@ sudo apt-get update
 sudo apt-get -y install git-core libmysqlclient-dev libpq-dev libsqlite3-dev
 
 # Nise BOSH
-./local/clone_nise_bosh.sh
+./scripts/clone_nise_bosh.sh
 (
     cd nise_bosh
     sudo ./bin/init
 )
-
 
 # Ruby
 if [ ! -d ~/.rbenv ]; then
@@ -37,13 +36,10 @@ gem install rake -v 0.9.2.2 # hack for collector
 rbenv rehash
 
 # cf-release
-./local/clone_cf_release.sh
+./scripts/clone_cf_release.sh
 
 # Run
-NISE_BOSH_REV=$NISE_BOSH_REV ./local/launch_nise_bosh.sh
-
-# Postinstall
-./local/postinstall.sh
+NISE_BOSH_REV=$NISE_BOSH_REV ./scripts/launch_nise_bosh.sh
 
 set +x
 NISE_IP_ADDRESS=${NISE_IP_ADDRESS:-`ip addr | grep 'inet .*global' | cut -f 6 -d ' ' | cut -f1 -d '/' | head -n 1`}

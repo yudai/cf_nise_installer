@@ -24,5 +24,5 @@ fi
     cd cf_nise_installer
     git checkout ${INSTALLER_BRANCH}
     git pull
-    ./local/install.sh
+    ./scripts/install.sh
 )

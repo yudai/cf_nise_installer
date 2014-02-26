@@ -38,7 +38,7 @@ Run the commands below on your server:
 
 ```sh
 sudo apt-get install curl
-bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/${INSTALLER_BRANCH:-master}/local/bootstrap.sh)
+bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/${INSTALLER_BRANCH:-master}/scripts/bootstrap.sh)
 ```
 
 The `bootstrap.sh` script installs everything needed for your devbox. This command may take a couple of hours at first run.
@@ -50,7 +50,7 @@ You need to restart your server once after the installation is completed.
 You can start the processes for your devbox by running the following command in the `cf_nise_installer` directory cloned by the `bootstrap.sh` script:
 
 ```sh
-./local/start_processes.sh
+./scripts/start_processes.sh
 ```
 
 This command launches the Monit process and then start up all monit jobs installed by Nise BOSH.
@@ -73,7 +73,7 @@ Confirm all the processes shown by `monit summary` indicate `running`. It takes 
 
 ### Update Existing Devbox
 
-To update your existing Devbox, you can use scripts in the `local` directory. You don't need to execute the `bootstrap.sh` script for this purpose.
+To update your existing Devbox, you can use scripts in the `scripts` directory. You don't need to execute the `bootstrap.sh` script for this purpose.
 
 * clone_cf_release.sh
   * Clones `cf-release` repository
@@ -93,7 +93,7 @@ To update your existing Devbox, you can use scripts in the `local` directory. Yo
   * Executes some additional tasks such as installing Ruby, Gems and Nise Bosh
 
 
-When run these scrips, be sure your are  in the `cf_nise_installer` directory, and not in `local` directory.
+When run these scrips, be sure your are  in the `cf_nise_installer` directory, and not in `scripts` directory.
 
 #### Notes for Updating Devbox
 
