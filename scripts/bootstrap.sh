@@ -22,6 +22,5 @@ fi
 (
     cd cf_nise_installer
     git checkout ${INSTALLER_BRANCH}
-    git pull
     ./scripts/install.sh
 )
