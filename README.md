@@ -1,16 +1,16 @@
 # Cloud Foundry v2 Nise Installer
 
-## Devbox Installer with Nise BOSH and nise-bosh-vagrant
+## Devbox Installer with Nise BOSH
 
-CF Nise Installer is a set of scripts that installs a Cloud Foundry v2 instance to your single machine or Vagrant VM. You can build your own 'devbox' quickly by running a single command with this installer. If the problem you get is certainly caused by this installer, please do not post to vcap-dev and use the issue page of this repository.
+CF Nise Installer is a set of scripts that installs a Cloud Foundry v2 instance to your single machine or Vagrant VM. You can build your own 'devbox' quickly with a single command with this installer.
 
-CF Nise Installer is based on [cf-release](https://github.com/cloudfoundry/cf-release) by Pivotal, [Nise BOSH](http://github.com/nttlabs/nise_bosh/) by NTT Laboratory and [nise-bosh-vagrant](https://github.com/BrianMMcClain/nise-bosh-vagrant) by Brian McClain.
+CF Nise Installer is based on [cf-release](https://github.com/cloudfoundry/cf-release) by Pivotal, [Nise BOSH](http://github.com/nttlabs/nise_bosh/) by NTT Laboratory.
 
 ### *NOTICE*
 
-When ask a question about Cloud Foundry build by this installer at vcap-dev, please describe that you are uing cf-nise-installer in your post. That makes isolating the problem and answering your question easier. If the problem you get is certainly caused by this installer, please do not post to vcap-dev and submit a issue to this repository.
-
 This installer is mainly for testing installation with BOSH. If you just want to try Cloud Foundry, [bosh-lite](https://github.com/cloudfoundry/bosh-lite) and [cf-vagrant-installer](https://github.com/Altoros/cf-vagrant-installer) may be a better solution for you.
+
+When ask a question about Cloud Foundry build by this installer at vcap-dev, please describe that you are uing cf-nise-installer in your post. That makes isolating the problem and answering your question easier. If the problem you get is certainly caused by this installer, please do not post to vcap-dev and submit a issue to this repository.
 
 ### Services
 
@@ -25,11 +25,11 @@ If you want to build a devbox on a Vagrant VM, skip this section and see the nex
 
 ### Requirements
 
-* Ubuntu 10.04 64bit
-   * *Ubuntu 12.04 is not supported*
+* Ubuntu 10.04 or 12.04 64bit
+   * *Ubuntu 10.04 is recommended*
    * Do NOT install RVM to avoid conflicting with RBenv
 * 8GB+ free HDD space
-* 4GB+ memory
+* 2GB+ memory
    * m1.medium or larger instance is recommended on AWS
 
 ### Installing Cloud Foundry Components
@@ -127,7 +127,7 @@ You can create a devbox VM quickly with a VM using Vagrant.
 #### Requirements
 
 * Vagrant 1.4 or later
-* Ruby 1.9.3-p448 (Required by cf-release)
+* Ruby 1.9.3-p484
 * 8GB+ free HDD space
 * 2GB+ free memory
 
@@ -138,8 +138,3 @@ Clone this repository and run the command below.
 ```sh
 vagrant up
 ```
-
-## Other resources
-
-* [cf-vagrant-installer](https://github.com/Altoros/cf-vagrant-installer)
-   * Another Chef-based vagrant project
