@@ -8,9 +8,9 @@ CF Nise Installer is based on [cf-release](https://github.com/cloudfoundry/cf-re
 
 ### *NOTICE*
 
-This installer is mainly for testing installation with BOSH. If you just want to try Cloud Foundry, [bosh-lite](https://github.com/cloudfoundry/bosh-lite) and [cf-vagrant-installer](https://github.com/Altoros/cf-vagrant-installer) may be a better solution for you.
+This installer is maintained mainly for testing cf-release on a baremetal environemnt. If you just want to try Cloud Foundry, [bosh-lite](https://github.com/cloudfoundry/bosh-lite) may be a better solution for you.
 
-When ask a question about Cloud Foundry build by this installer at vcap-dev, please describe that you are uing cf-nise-installer in your post. That makes isolating the problem and answering your question easier. If the problem you get is certainly caused by this installer, please do not post to vcap-dev and submit a issue to this repository.
+When ask a question about Cloud Foundry build by this installer at vcap-dev, please describe that you are uing cf-nise-installer in your post. That makes it easier to isolate your problem and to answer your question. If the problem you got is certainly caused by this installer, please do not post to vcap-dev and submit an issue to this repository.
 
 ### Services
 
@@ -41,19 +41,19 @@ sudo apt-get install curl
 bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/${INSTALLER_BRANCH:-master}/scripts/bootstrap.sh)
 ```
 
-The `bootstrap.sh` script installs everything needed for your devbox. This command may take a couple of hours at first run.
+The `bootstrap.sh` script installs everything necessary to your devbox. This command may take a couple of hours at first run.
 
 You need to restart your server once after the installation is completed.
 
 ### Launching Processes
 
-You can start the processes for your devbox by running the following command in the `cf_nise_installer` directory cloned by the `bootstrap.sh` script:
+You can start Cloud Foundry by running the following command in the `cf_nise_installer` directory cloned by the `bootstrap.sh` script:
 
 ```sh
 ./scripts/start.sh
 ```
 
-This command launches the Monit process and then start up all monit jobs installed by Nise BOSH.
+This command launches a Monit process and then start up all monit jobs installed by Nise BOSH.
 
 You can also manually manage the processes with the Monit command:
 
@@ -69,7 +69,7 @@ sudo /var/vcap/bosh/bin/monit summary # shorter
 sudo /var/vcap/bosh/bin/monit stop all
 ```
 
-Confirm all the processes shown by `monit summary` indicate `running`. It takes a few minutes to initialize all processes.
+Confirm all the processes shown by `monit summary` is indicating `running`. It takes a few minutes to initialize all processes.
 
 ### Update Existing Devbox
 
@@ -78,41 +78,40 @@ To update your existing Devbox, you can use scripts in the `scripts` directory. 
 * install.sh
   * Runs the following scripts in order
 * install_ruby.sh
-  * Installs Ruby binaries with Rbenv
+  * Installs Ruby binaries with Rbenv and the `cf` command gem
+  * If `.rbenv` directory exists in your homedirectory, this script do nothing
 * clone_nise_bosh.sh
   * Clones the `nise_bosh` repository
-  * When the `nise_bosh` directory is not empty, does nothing.
+  * When the `nise_bosh` directory is not empty, this script do nothing
 * clone_cf_release.sh
   * Clones the `cf-release` repository
-  * When the `cf-release` directory is not empty, does nothing.
+  * When the `cf-release` directory is not empty, this script do nothing
 * install_environemnt.sh
   * Run the `init` command of Nise BOSH
 * install_cf_release.sh
   * Installs cf-release jobs and packages with Nise BOSH
 
 * start.sh
-  * Invokes the Monit process and CF processes
+  * Invokes a Monit process and CF processes
 * stop.sh
   * Stop all CF processes
 
-When run these scrips, be sure your are in the `cf_nise_installer` directory, and not in `scripts` directory.
+When run these scrips, be sure your are in the `cf_nise_installer` directory and not in `scripts` directory.
 
 #### Notes for Updating Devbox
 
-These scripts do *not* automatically update existing files in the working directory such as the `cf-release` and `nise_bosh` directories.
-
-You need to delete the `cf_nise_installer` directory created by the `bootstrap.sh` script to apply changes on environment variables below and other modification in outer repositories such as `cf-release`. You are alwo able to manually edit files in the directory and run `install.sh` or each script required to install.
+These scripts do *not* automatically update existing files in the working directory such as the `cf-release` and `nise_bosh` directories. This means once you have executed the installer, you need to manually update files in your working directory to update your devbox. If you just want to update your debox to the latest version of cf-release, it is the easiest way to delete your `cf_nise_installer` directory and run the `bootstarp.sh` script.
 
 
 ### Environment Variables
 
-You can customize your installation using environment variables.
+You can customize your installation using environment variables. Note that variables taks effect only when script is not skipped. For example, the variable `CF_RELEASE_URL` is used only when the `cf-release` directory is empty.
 
 | Name              | Description                              | Used in                                 | Default                                        |
 | :---------------: | :--------------------------------------: | :-------------------------------------: | :--------------------------------------------: |
 | INSTALLER_URL     | URI for cf_nise_installer                | bootstrap.sh                            | https://github.com/yudai/cf_nise_installer.git |
 | INSTALLER_BRANCH  | Branch/Revision for cf_nise_installer    | bootstrap.sh                            | master                                         |
-| CF_RELEASE_URL    | URI for cf-release | clone_cf_release.sh | clone_cf_release.sh                     | *nil* (https://github.com/cloudfoundry/cf-release.git is set to submodule)|
+| CF_RELEASE_URL    | URI for cf-release                       | clone_cf_release.sh                     | *nil* (https://github.com/cloudfoundry/cf-release.git is set to submodule)|
 | CF_RELEASE_BRANCH | Branch/Revision for cf-release           | clone_cf_release.sh                     | *nil* (certain stable revision is set to submodule) |
 | CF_RELEASE_USE_HEAD | Create a dev release with the head of the branch | clone_cf_release.sh           | no (set `yes` to enable)                       |
 | NISE_BOSH_REV     | Git revision specifier [note] of nise_bosh repo | clone_nise_bosh.sh               | *nil* (currently checked-out revision)         |
