@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :unix_reboot
   # Start the processes
   config.vm.provision :shell do |shell|
-    shell.inline = 'cd /vagrant && ./scripts/start_processes.sh'
+    shell.inline = 'cd /vagrant && ./scripts/start.sh'
     shell.privileged = false
   end
 
