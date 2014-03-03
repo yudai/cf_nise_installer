@@ -3,4 +3,4 @@
 	url = https://github.com/nttlabs/nise_bosh
 [submodule "cf-release"]
 	path = cf-release
-	url = https://github.com/cloudfoundry/cf-release
+	url = https://github.com/yudai/cf-release
