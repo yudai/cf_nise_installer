@@ -12,7 +12,11 @@ jobs:
       - cloud_controller_ng
       - uaa
       - gorouter
+      - haproxy
       - dea_next
+      - dea_logging_agent
+      - loggregator
+      - loggregator_trafficcontroller
       - etcd
       - hm9000
 
@@ -39,15 +43,15 @@ properties:
       - 192.168.10.10
     use_gnatsd: false
 
-  dea_next:
-      directory_server_protocol: http
+  dea_next: {}
+#      directory_server_protocol: http
 
   logger_endpoint:
     shared_secret: c1oudc0w
 
   cc: &cc
     bulk_api_password: c1oudc0w
-    srv_api_uri: http://api.192.168.10.10.xip.io
+    srv_api_uri: https://api.192.168.10.10.xip.io
     db_logging_level: debug2
     ccng.logging_level: debug2
     db_encryption_key: c1oudc0w
@@ -113,8 +117,8 @@ properties:
   uaa:
     login:
       addnew: false
-    url: http://uaa.192.168.10.10.xip.io
-    no_ssl: true
+    url: https://uaa.192.168.10.10.xip.io
+#    no_ssl: true
     catalina_opts: -Xmx384m -XX:MaxPermSize=128m
     jwt:
       signing_key: |
@@ -156,10 +160,71 @@ properties:
     - 192.168.10.10
 
   router:
+    port: 8888
     status:
-      port: 8888
+      port: 18888
       user: gorouter
       password: c1oudc0w
+    servers:
+      z1:
+        - 192.168.10.10
+      z2: []
 
   login:
     enabled: false
+
+  loggregator:
+    status:
+      user: loggregator
+      password: c1oudc0w
+      port: 5768
+    incoming_port: 3456
+    outgoing_port: 38080
+    servers:
+      default:
+        - 192.168.10.10
+
+  traffic_controller:
+    zone: default
+    status:
+      user: trafic_controller
+      password: c1oudc0w
+      port: 6789
+    incoming_port: 13456
+    outgoing_port: 48080
+
+  loggregator_endpoint:
+    shared_secret: c1oudc0w
+    host: 192.168.10.10
+
+  ha_proxy:
+    ssl_pem: |
+      -----BEGIN CERTIFICATE-----
+      MIICLzCCAZgCCQCSoIG3LoeSMTANBgkqhkiG9w0BAQUFADBcMQswCQYDVQQGEwJV
+      UzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xEDAOBgNVBAoT
+      B1Bpdm90YWwxFjAUBgNVBAsTDUNsb3VkIEZvdW5kcnkwHhcNMTMxMDE3MjMxNzM5
+      WhcNMTQxMDE3MjMxNzM5WjBcMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAU
+      BgNVBAcTDVNhbiBGcmFuY2lzY28xEDAOBgNVBAoTB1Bpdm90YWwxFjAUBgNVBAsT
+      DUNsb3VkIEZvdW5kcnkwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANqyjJMH
+      FDbJ4XM2vLRxz6i82Gd2Y2dnAKYgu67FgheHGQJSv38lvn8JrAOBXu2QJgP8sJa+
+      XqUWUTMo9BWvhvedQLojtcpLdULc0FhlIXn8bThGlTQyrSg9QJobhQZGziFVrdQM
+      UZy4X+s6A2Szb9iOg3TYibnnfnuvdZli83eRAgMBAAEwDQYJKoZIhvcNAQEFBQAD
+      gYEAbFu65WT+czpiJqHhNz5AnGYA8kieVlV7KhcljLtsU4Sxut5Vq9uXFBE09KCg
+      YkyZ9KfzXArTeRCfcbm5xq12I+1nf6q0QjT1y3P6ztax0rpyb0i+4GWvA+ruMhfx
+      n4QM1MkiJVYBGKkXFZDd1zsdR3pY4vm1uiMY75IvJQfgb08=
+      -----END CERTIFICATE-----
+      -----BEGIN RSA PRIVATE KEY-----
+      MIICXQIBAAKBgQDasoyTBxQ2yeFzNry0cc+ovNhndmNnZwCmILuuxYIXhxkCUr9/
+      Jb5/CawDgV7tkCYD/LCWvl6lFlEzKPQVr4b3nUC6I7XKS3VC3NBYZSF5/G04RpU0
+      Mq0oPUCaG4UGRs4hVa3UDFGcuF/rOgNks2/YjoN02Im55357r3WZYvN3kQIDAQAB
+      AoGAa88G81fTBCtDA1vhbIaKWuE1QNOgrxGcxUhvnPlqZxTHJFkMY66EmPV4oYW9
+      +RhNVTvVBYq092boAnNW1/Xebvrk1SnBDkrLntnGPmExkatOkPTFFlNXfePu6qOJ
+      ULwYg8rKRwpvLoQXxbzMDXApPBifBNWGHVneGuHLpwPEQgECQQD0IJOecEyorrCR
+      6+wmJBS/IwqQO0Ooj7kZEg65MHi9exVe+XFvP0lW2NAUsDuBLz79hjslSqIJjRG8
+      c6q36oqhAkEA5VVeEip+T4DV12I5A5maGexVMeC92K7EGU/H8YhltxVZ/RtNngdT
+      3r19WeDbDF7R5CJy2f7AYullk3S6fkk28QJBALdEiW1k4rezRMyW7tYHOifvN2vl
+      gbpWAt/GRZVSxSGB+B4vZq/cM8NlynftgQ5PGJucnGQ3bgN7irgNoTimc2ECQFMX
+      QBMy5DroAhKcmu2r/IKB90gwFnjosVI+bsIbWkcgbE9hUhj8rK2aWE11Q8hSnpea
+      x6QmQgxUZiIr+9n/qvECQQDiDIeSmo2mRYsaqr4CQ3Ak+EDjsm9XTpXHuqm+xgFO
+      iDIeQCWd3/twqdDTR7FaDE7Q0i559u7A1yLumUn8caLF
+      -----END RSA PRIVATE KEY-----
