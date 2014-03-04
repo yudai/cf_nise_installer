@@ -33,4 +33,4 @@ api_url=`grep srv_api_uri: ./manifests/deploy.yml | awk '{ print $2 }'`
 password=`grep ' - admin' ./manifests/deploy.yml | cut -f 2 -d '|'  `
 echo "Target: 'cf target ${api_url}'"
 echo "Login : 'cf login --password ${password} admin'"
-echo "Note  : Create an organization before creating a space with `cf create-org`"
+echo "Note  : Create an organization before creating a space with 'cf create-org'"
