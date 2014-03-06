@@ -12,10 +12,6 @@ This installer is maintained mainly for testing cf-release on a baremetal enviro
 
 When ask a question about Cloud Foundry build by this installer at vcap-dev, please describe that you are uing cf-nise-installer in your post. That makes it easier to isolate your problem and to answer your question. If the problem you got is certainly caused by this installer, please do not post to vcap-dev and submit an issue to this repository.
 
-### Services
-
-You can add services to a CF instance created by this installer using [cf_nise_installer_services](https://github.com/yudai/cf_nise_installer_services). Currently only postgresql is available.
-
 
 ## Building Devbox on Single Server
 
