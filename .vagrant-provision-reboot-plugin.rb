@@ -89,7 +89,7 @@ class RebootPlugin < Vagrant.plugin('2')
   name 'Reboot Plugin'
 
   # This plugin provides a provisioner called unix_reboot.
-  provisioner 'unix_reboot' do
+  provisioner(:unix_reboot) do
 
     # Create a provisioner.
     class RebootProvisioner < Vagrant.plugin('2', :provisioner)
@@ -136,49 +136,11 @@ class RebootPlugin < Vagrant.plugin('2')
       end
     end
     RebootProvisioner
-
   end
 
-  # This plugin provides a provisioner called windows_reboot.
-  provisioner 'windows_reboot' do
-
-    # Create a provisioner.
-    class RebootProvisioner < Vagrant.plugin('2', :provisioner)
-      # Initialization, define internal state. Nothing needed.
-      def initialize(machine, config)
-        super(machine, config)
-      end
-
-      # Configuration changes to be done. Nothing needed here either.
-      def configure(root_config)
-        super(root_config)
-      end
-
-      # Run the provisioning.
-      def provision
-        command = 'shutdown -t 0 -r -f'
-        @machine.ui.info("Issuing command: #{command}")
-        @machine.communicate.execute(command) do
-          if type == :stderr
-            @machine.ui.error(data);
-          end
-        end
-
-        begin
-          sleep 5
-        end until @machine.communicate.ready?
-
-        # Now the machine is up again, perform the necessary tasks.
-        @machine.ui.info("Launching remount_synced_folders action...")
-        @machine.action('remount_synced_folders')
-      end
-
-      # Nothing needs to be done on cleanup.
-      def cleanup
-        super
-      end
+  config(:unix_reboot, :provisioner) do
+    class Config < Vagrant.plugin(2, :config)
     end
-    RebootProvisioner
-
+    Config
   end
 end
