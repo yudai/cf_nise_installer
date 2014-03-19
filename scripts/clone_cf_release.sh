@@ -15,7 +15,7 @@ if [ ! "$(ls -A cf-release)" ]; then
     (
         cd cf-release
 
-        if [ -z "${CF_RELEASE_BRANCH}" ]; then
+        if [ -n "${CF_RELEASE_BRANCH}" ]; then
             git checkout -f ${CF_RELEASE_BRANCH}
         fi
 
