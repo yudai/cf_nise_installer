@@ -10,6 +10,8 @@ jobs:
       - nats
       - nats_stream_forwarder
       - cloud_controller_ng
+      - cloud_controller_worker
+      - cloud_controller_clock
       - uaa
       - haproxy
       - gorouter
