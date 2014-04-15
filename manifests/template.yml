@@ -63,6 +63,13 @@ properties:
     hm9000_noop: false
     staging_upload_user: uploaduser
     staging_upload_password: c1oudc0w
+    install_buildpacks:
+      - name: java_buildpack
+        package: buildpack_java
+      - name: ruby_buildpack
+        package: buildpack_ruby
+      - name: nodejs_buildpack
+        package: buildpack_nodejs
   ccng: *cc
 
   ccdb: &ccdb
