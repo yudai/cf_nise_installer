@@ -40,7 +40,6 @@ properties:
     port: 4222
     machines:
       - 192.168.10.10
-    use_gnatsd: false
 
   dea_next: {}
 
