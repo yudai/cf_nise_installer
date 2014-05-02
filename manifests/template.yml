@@ -16,6 +16,9 @@ jobs:
       - haproxy
       - gorouter
       - dea_next
+      - dea_logging_agent
+      - loggregator
+      - loggregator_trafficcontroller
       - etcd
       - hm9000
 
@@ -176,6 +179,30 @@ properties:
 
   login:
     enabled: false
+
+  loggregator:
+    status:
+      user: loggregator
+      password: c1oudc0w
+      port: 5768
+    incoming_port: 3456
+    outgoing_port: 38080
+    servers:
+      default:
+        - 192.168.10.10
+
+  traffic_controller:
+    zone: default
+    status:
+      user: trafic_controller
+      password: c1oudc0w
+      port: 6789
+    incoming_port: 13456
+    outgoing_port: 48080
+
+  loggregator_endpoint:
+    shared_secret: c1oudc0w
+    host: 192.168.10.10
 
   ha_proxy:
     ssl_pem: |
