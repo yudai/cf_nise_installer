@@ -13,5 +13,5 @@ if ! (rbenv versions | grep -q 1.9.3-p484); then
 fi
 rbenv local 1.9.3-p484
 
-gem install bundler cf --no-rdoc --no-ri
+gem install bundler --no-rdoc --no-ri
 rbenv rehash
