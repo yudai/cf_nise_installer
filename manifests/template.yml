@@ -159,8 +159,9 @@ properties:
       users:
       - admin|c1oudc0w|scim.write,scim.read,openid,cloud_controller.admin
 
-  etcd_ips:
-    - 192.168.10.10
+  etcd:
+    machines:
+      - 192.168.10.10
 
   router:
     port: 8888
