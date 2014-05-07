@@ -1,8 +1,12 @@
 require './.vagrant-provision-reboot-plugin'
 
+NISE_IP_ADDRESS = "10.39.39.39"
+
 Vagrant.configure("2") do |config|
   config.vm.box = "lucid64"
   config.vm.box_url = "http://files.vagrantup.com/lucid64.box"
+
+  config.vm.network :private_network, ip: NISE_IP_ADDRESS
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
@@ -15,7 +19,7 @@ Vagrant.configure("2") do |config|
   end
   # Run installer
   config.vm.provision :shell do |shell|
-    shell.inline = 'cd /vagrant && ./scripts/install.sh'
+    shell.inline = "cd /vagrant && NISE_IP_ADDRESS=#{NISE_IP_ADDRESS} ./scripts/install.sh"
     shell.privileged = false
   end
   # Reboot to reload the kernel
