@@ -31,5 +31,5 @@ set +x
 echo "All processes have been started!"
 api_url=`grep srv_api_uri: ./manifests/deploy.yml | awk '{ print $2 }'`
 password=`grep ' - admin' ./manifests/deploy.yml | cut -f 2 -d '|'  `
-echo "Login : 'cf login -a ${api_url}' -u admin -p ${password}'"
+echo "Login : 'cf login -a ${api_url} -u admin -p ${password}' --skip-ssl-validation"
 echo "Download CF CLI from https://github.com/cloudfoundry/cli"
