@@ -34,7 +34,7 @@ Run the commands below on your server:
 
 ```sh
 sudo apt-get install curl
-bash < <(curl -s -k -B https://raw.github.com/yudai/cf_nise_installer/${INSTALLER_BRANCH:-master}/scripts/bootstrap.sh)
+bash < <(curl -s -k -B https://raw.githubusercontent.com/yudai/cf_nise_installer/${INSTALLER_BRANCH:-master}/scripts/bootstrap.sh)
 ```
 
 The `bootstrap.sh` script installs everything necessary to your devbox. This command may take a couple of hours at first run.
