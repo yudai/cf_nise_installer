@@ -85,6 +85,14 @@ properties:
             destination: 172.32.0.0-192.167.255.255
           - protocol: all
             destination: 192.169.0.0-255.255.255.255
+      - name: private_networks
+        rules:
+          - protocol: all
+            destination: 10.0.0.0-10.255.255.255
+          - protocol: all
+            destination: 172.16.0.0-172.31.255.255
+          - protocol: all
+            destination: 192.168.0.0-192.168.255.255
       - name: dns
         rules:
           - protocol: tcp
@@ -95,9 +103,11 @@ properties:
             ports: '53'
     default_running_security_groups:
       - public_networks
+      - private_networks
       - dns
     default_staging_security_groups:
       - public_networks
+      - private_networks
       - dns
   ccng: *cc
 
