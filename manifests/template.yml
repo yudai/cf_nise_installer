@@ -237,9 +237,11 @@ properties:
     incoming_port: 13456
     outgoing_port: 48080
 
-  loggregator_endpoint:
+  metron_endpoint: &metron_endpoint
     shared_secret: c1oudc0w
     host: 192.168.10.10
+    port: 13456
+  loggregator_endpoint: *metron_endpoint
 
   ha_proxy:
     ssl_pem: |
