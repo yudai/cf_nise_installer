@@ -218,6 +218,7 @@ properties:
     enabled: false
 
   loggregator:
+    zone: default
     status:
       user: loggregator
       password: c1oudc0w
