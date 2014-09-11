@@ -20,7 +20,9 @@ jobs:
       - loggregator
       - loggregator_trafficcontroller
       - etcd
+      - etcd_metrics_server
       - hm9000
+      - metron_agent
 
 properties:
   networks:
@@ -45,9 +47,6 @@ properties:
       - 192.168.10.10
 
   dea_next: {}
-
-  logger_endpoint:
-    shared_secret: c1oudc0w
 
   cc: &cc
     bulk_api_password: c1oudc0w
@@ -203,6 +202,13 @@ properties:
     machines:
       - 192.168.10.10
 
+  etcd_metrics_server:
+    nats:
+      username: nats
+      password: c1oudc0w
+      machines:
+        - 192.168.10.10
+
   router:
     port: 8888
     status:
@@ -217,14 +223,19 @@ properties:
   login:
     enabled: false
 
+  logger_endpoint:
+   port: 4443
+
   loggregator:
     zone: default
     status:
       user: loggregator
       password: c1oudc0w
       port: 5768
-    incoming_port: 3456
+    incoming_port: 13456
+    dropsonde_incoming_port: 13457
     outgoing_port: 38080
+    outgoing_dropsonde_port: 38081
     servers:
       default:
         - 192.168.10.10
@@ -235,14 +246,29 @@ properties:
       user: trafic_controller
       password: c1oudc0w
       port: 6789
-    incoming_port: 13456
-    outgoing_port: 48080
+    incoming_port: 23456
+    outgoing_port: 28080
 
-  metron_endpoint: &metron_endpoint
+  metron_agent:
+    zone: default
+    status:
+      user: trafic_controller
+      password: c1oudc0w
+      port: 6799
+    incoming_port: 3456
+    dropsonde_incoming_port: 3457
+
+  metron_endpoint:
     shared_secret: c1oudc0w
-    host: 192.168.10.10
-    port: 13456
-  loggregator_endpoint: *metron_endpoint
+    host: 127.0.0.1
+    port: 3456
+    dropsonde_port: 3457
+
+  loggregator_endpoint:
+    shared_secret: c1oudc0w
+
+  dropsonde:
+    enabled: true
 
   ha_proxy:
     ssl_pem: |
