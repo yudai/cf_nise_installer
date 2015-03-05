@@ -120,13 +120,6 @@ class RebootPlugin < Vagrant.plugin('2')
         # Now the machine is up again, perform the necessary tasks.
         @machine.ui.info("Launching remount_synced_folders action...")
 
-        # Install guest tools
-        @machine.communicate.sudo('/etc/init.d/vboxadd setup') do |type, data|
-          if type == :stderr
-            @machine.ui.error(data);
-          end
-        end
-
         @machine.action('remount_synced_folders')
       end
 
