@@ -1,5 +1,8 @@
 #!/bin/bash -ex
 
+path=`dirname $0`
+cd "$path"/../
+
 sudo /var/vcap/bosh/bin/monit
 sleep 5
 
