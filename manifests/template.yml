@@ -23,6 +23,7 @@ jobs:
       - metron_agent
       - dea_logging_agent
       - etcd_metrics_server
+      - consul_agent
 
 properties:
   networks:
@@ -202,6 +203,8 @@ properties:
       doppler:
         authorities: uaa.resource
         secret: c1oudc0w
+      gorouter:
+        secret: c1oudc0w
     scim:
       users:
       - admin|c1oudc0w|scim.write,scim.read,openid,cloud_controller.admin,doppler.firehose
@@ -245,6 +248,7 @@ properties:
       port: 6799
     incoming_port: 3456
     dropsonde_incoming_port: 3457
+    deployment: default
 
   doppler:
     zone: default
