@@ -21,8 +21,7 @@ If you want to build a devbox on a Vagrant VM, skip this section and see the nex
 
 ### Requirements
 
-* Ubuntu 10.04 or 12.04 64bit
-   * *Ubuntu 10.04 is recommended*
+* Ubuntu 12.04 64bit (Trusty)
    * Do NOT install RVM to avoid conflicting with RBenv
 * 8GB+ free HDD space
 * 2GB+ memory
