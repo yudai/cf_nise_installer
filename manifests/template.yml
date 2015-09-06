@@ -54,7 +54,7 @@ properties:
     bulk_api_password: c1oudc0w
     srv_api_uri: https://api.192.168.10.10.xip.io
     db_logging_level: debug2
-    logging_level: debug2
+    logging_level: info
     ccng.logging_level: debug2
     db_encryption_key: c1oudc0w
     quota_definitions:
