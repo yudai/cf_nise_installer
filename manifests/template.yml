@@ -167,11 +167,6 @@ properties:
       client_secret: c1oudc0w
     url: https://uaa.192.168.10.10.xip.io
     catalina_opts: -Xmx384m -XX:MaxPermSize=128m
-    authentication: 
-      policy: 
-        countFailuresWithinSeconds: 120 
-        lockoutAfterFailures: 10 
-        lockoutPeriodSeconds: 300 
     jwt:
       signing_key: |
         -----BEGIN RSA PRIVATE KEY-----
