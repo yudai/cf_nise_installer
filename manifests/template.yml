@@ -223,6 +223,7 @@ properties:
 
   router:
     port: 8888
+    enable_routing_api: false
     status:
       port: 18888
       user: gorouter
