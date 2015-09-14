@@ -54,6 +54,7 @@ properties:
     bulk_api_password: c1oudc0w
     srv_api_uri: https://api.192.168.10.10.xip.io
     db_logging_level: debug2
+    logging_level: debug2
     ccng.logging_level: debug2
     db_encryption_key: c1oudc0w
     quota_definitions:
@@ -198,16 +199,33 @@ properties:
       username: batch-username
       password: c1oudc0w
     clients:
-      cloud_controller_username_lookup:
+      login:
+        override: true
+        scope: openid,oauth.approvals
+        authorities: oauth.login,scim.write,clients.read,notifications.write,critical_notifications.write,emails.write,scim.userids,password.write
         secret: c1oudc0w
+        authorized-grant-types: authorization_code,client_credentials,refresh_token
+      notifications:
+        secret: c1oudc0w
+        authorities: cloud_controller.admin,scim.read
+        authorized-grant-types: client_credentials
       doppler:
+        override: true
         authorities: uaa.resource
         secret: c1oudc0w
-      gorouter:
+      cloud_controller_username_lookup:
+        authorities: scim.userids
         secret: c1oudc0w
+        authorized-grant-types: client_credentials
+      gorouter:
+        authorities: clients.read,clients.write,clients.admin,route.admin,route.advertise
+        authorized-grant-types: client_credentials,refresh_token
+        scope: openid,cloud_controller_service_permissions.read
+        secret: c1oudc0w
+
     scim:
       users:
-      - admin|c1oudc0w|scim.write,scim.read,openid,cloud_controller.admin,doppler.firehose
+      - admin|c1oudc0w|scim.write,scim.read,openid,cloud_controller.admin,doppler.firehose,uaa.admin,password.write
 
   etcd:
     machines:
@@ -222,6 +240,7 @@ properties:
 
   router:
     port: 8888
+    enable_routing_api: false
     status:
       port: 18888
       user: gorouter
