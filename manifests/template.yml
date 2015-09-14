@@ -238,6 +238,10 @@ properties:
       machines:
         - 192.168.10.10
 
+  consul:
+      require_ssl: false
+      encrypt_keys: []
+
   router:
     port: 8888
     enable_routing_api: false
