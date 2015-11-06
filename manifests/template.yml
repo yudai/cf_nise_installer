@@ -24,6 +24,7 @@ jobs:
       - dea_logging_agent
       - etcd_metrics_server
       - consul_agent
+      - route_registrar
 
 properties:
   networks:
@@ -198,6 +199,8 @@ properties:
     batch:
       username: batch-username
       password: c1oudc0w
+    proxy:
+      servers: [192.168.10.10]
     clients:
       login:
         override: true
@@ -218,16 +221,22 @@ properties:
         secret: c1oudc0w
         authorized-grant-types: client_credentials
       gorouter:
-        authorities: clients.read,clients.write,clients.admin,route.admin,route.advertise
+        authorities: clients.read,clients.write,clients.admin,routing.routes.write,routing.routes.read
         authorized-grant-types: client_credentials,refresh_token
         scope: openid,cloud_controller_service_permissions.read
         secret: c1oudc0w
+      cc_routing:
+        authorities: routing.router_groups.read
+        secret: c1oudc0w
+        authorized-grant-types: client_credentials
 
     scim:
       users:
       - admin|c1oudc0w|scim.write,scim.read,openid,cloud_controller.admin,doppler.firehose,uaa.admin,password.write
 
   etcd:
+    require_ssl: false
+    peer_require_ssl: false
     machines:
       - 192.168.10.10
 
@@ -262,6 +271,8 @@ properties:
     dropsonde_incoming_port: 13457
     outgoing_dropsonde_port: 18081
     doppler_port: 8081
+    etcd:
+      machines: [192.168.10.10]
 
   metron_agent:
     zone: default
@@ -312,6 +323,32 @@ properties:
 
   dropsonde:
     enabled: true
+
+  route_registrar:
+    routes:
+    - name: api
+      port: 9022
+      uris:
+      - "api.192.168.10.10.xip.io"
+    - name: hm9000
+      port: 5155
+      uris:
+      - "hm9000.192.168.10.10.xip.io"
+    - name: doppler
+      port: 8081
+      uris:
+      - "doppler.192.168.10.10.xip.io"
+    - name: loggregator
+      port: 18080
+      uris:
+      - "loggregator.192.168.10.10.xip.io"
+    - name: uaa
+      port: 8080
+      uris:
+      - "uaa.192.168.10.10.xip.io"
+      - "*.uaa.192.168.10.10.xip.io"
+      - "login.192.168.10.10.xip.io"
+      - "*.login.192.168.10.10.xip.io"
 
   ha_proxy:
     ssl_pem: |
