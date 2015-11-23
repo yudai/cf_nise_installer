@@ -12,6 +12,11 @@ Vagrant.configure("2") do |config|
     v.memory = 2048
   end
 
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+      config.proxy.http     = ENV["http_proxy"]
+      config.proxy.https    = ENV["https_proxy"]
+      config.proxy.no_proxy = ENV["no_proxy"]
+  end
 
   # Install newer Git to use relative paths in submodules' .git
   config.vm.provision :shell do |shell|
