@@ -25,6 +25,8 @@ jobs:
       - etcd_metrics_server
       - consul_agent
       - route_registrar
+      - ruby-buildpack
+      - nodejs-buildpack
 
 properties:
   networks:
@@ -72,9 +74,9 @@ properties:
       - name: java_buildpack
         package: buildpack_java
       - name: ruby_buildpack
-        package: buildpack_ruby
+        package: ruby-buildpack
       - name: nodejs_buildpack
-        package: buildpack_nodejs
+        package: nodejs-buildpack
     security_group_definitions:
       - name: public_networks
         rules:
@@ -267,6 +269,13 @@ properties:
   consul:
       require_ssl: false
       encrypt_keys: []
+      agent:
+        mode: server
+        servers:
+          lan:
+          - 192.168.10.10
+        services:
+          cloud_controller_ng: {}
 
   router:
     port: 8888
@@ -348,22 +357,27 @@ properties:
     routes:
     - name: api
       port: 9022
+      registration_interval: 10s
       uris:
       - "api.192.168.10.10.xip.io"
     - name: hm9000
       port: 5155
+      registration_interval: 10s
       uris:
       - "hm9000.192.168.10.10.xip.io"
     - name: doppler
       port: 8081
+      registration_interval: 10s
       uris:
       - "doppler.192.168.10.10.xip.io"
     - name: loggregator
       port: 18080
+      registration_interval: 10s
       uris:
       - "loggregator.192.168.10.10.xip.io"
     - name: uaa
       port: 8080
+      registration_interval: 10s
       uris:
       - "uaa.192.168.10.10.xip.io"
       - "*.uaa.192.168.10.10.xip.io"
