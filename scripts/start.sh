@@ -8,7 +8,9 @@ sleep 5
 
 for process in \
     postgres \
-    nats
+    nats \
+    consul_agent \
+    etcd
 do
     sudo /var/vcap/bosh/bin/monit start $process
     sleep 30
