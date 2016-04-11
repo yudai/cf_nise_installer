@@ -25,6 +25,8 @@ jobs:
       - etcd_metrics_server
       - consul_agent
       - route_registrar
+      - ruby-buildpack
+      - nodejs-buildpack
 
 properties:
   networks:
@@ -72,9 +74,9 @@ properties:
       - name: java_buildpack
         package: buildpack_java
       - name: ruby_buildpack
-        package: buildpack_ruby
+        package: ruby-buildpack
       - name: nodejs_buildpack
-        package: buildpack_nodejs
+        package: nodejs-buildpack
     security_group_definitions:
       - name: public_networks
         rules:
@@ -167,6 +169,8 @@ properties:
       addnew: false
       client_secret: c1oudc0w
     url: https://uaa.192.168.10.10.xip.io
+    ssl:
+      port: -1
     catalina_opts: -Xmx384m -XX:MaxPermSize=128m
     jwt:
       signing_key: |
@@ -221,14 +225,29 @@ properties:
         secret: c1oudc0w
         authorized-grant-types: client_credentials
       gorouter:
-        authorities: clients.read,clients.write,clients.admin,routing.routes.write,routing.routes.read
+        authorities: routing.routes.read
         authorized-grant-types: client_credentials,refresh_token
-        scope: openid,cloud_controller_service_permissions.read
         secret: c1oudc0w
       cc_routing:
         authorities: routing.router_groups.read
         secret: c1oudc0w
         authorized-grant-types: client_credentials
+      tcp_emitter:
+        authorities: routing.routes.write,routing.routes.read
+        authorized-grant-types: client_credentials,refresh_token
+        secret: c1oudc0w
+      tcp_router:
+        authorities: routing.routes.read
+        authorized-grant-types: client_credentials,refresh_token
+        secret: c1oudc0w
+      cf:
+        id: cf
+        override: true
+        authorized-grant-types: implicit,password,refresh_token
+        scope: cloud_controller.read,cloud_controller.write,openid,password.write,cloud_controller.admin,scim.read,scim.write,doppler.firehose,uaa.user,routing.router_groups.read
+        authorities: uaa.none
+        access-token-validity: 600
+        refresh-token-validity: 2592000
 
     scim:
       users:
@@ -250,6 +269,13 @@ properties:
   consul:
       require_ssl: false
       encrypt_keys: []
+      agent:
+        mode: server
+        servers:
+          lan:
+          - 192.168.10.10
+        services:
+          cloud_controller_ng: {}
 
   router:
     port: 8888
@@ -324,26 +350,34 @@ properties:
   dropsonde:
     enabled: true
 
+  hm9000:
+    port: 5155
+
   route_registrar:
     routes:
     - name: api
       port: 9022
+      registration_interval: 10s
       uris:
       - "api.192.168.10.10.xip.io"
     - name: hm9000
       port: 5155
+      registration_interval: 10s
       uris:
       - "hm9000.192.168.10.10.xip.io"
     - name: doppler
       port: 8081
+      registration_interval: 10s
       uris:
       - "doppler.192.168.10.10.xip.io"
     - name: loggregator
       port: 18080
+      registration_interval: 10s
       uris:
       - "loggregator.192.168.10.10.xip.io"
     - name: uaa
       port: 8080
+      registration_interval: 10s
       uris:
       - "uaa.192.168.10.10.xip.io"
       - "*.uaa.192.168.10.10.xip.io"
