@@ -462,9 +462,7 @@ properties:
       user: gorouter
       password: c1oudc0w
     servers:
-      z1:
-        - 192.168.10.10
-      z2: []
+      - 192.168.10.10
 
   login:
     enabled: false
