@@ -2,7 +2,7 @@
 
 if [ ! -f /etc/lsb-release ] || \
    [ `uname -m` != "x86_64" ]; then
-    echo "This installer supports only Ubuntu 10.04 and 12.04 64bit server"
+    echo "This installer supports only Ubuntu 10.04, 12.04 and 14.04 64bit server."
     exit 1;
 fi
 
