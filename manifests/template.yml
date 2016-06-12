@@ -27,7 +27,10 @@ jobs:
       - route_registrar
       - ruby-buildpack
       - nodejs-buildpack
-      - java-buildpack
+      - java-offline-buildpack
+      - binary-buildpack
+      - go-buildpack
+      - staticfile-buildpack
 
 properties:
   networks:
@@ -80,11 +83,17 @@ properties:
     staging_upload_password: c1oudc0w
     install_buildpacks:
       - name: java_buildpack
-        package: buildpack_java
+        package: buildpack_java_offline
       - name: ruby_buildpack
         package: ruby-buildpack
       - name: nodejs_buildpack
         package: nodejs-buildpack
+      - name: staticfile_buildpack
+        package: staticfile-buildpack
+      - name: binary_buildpack
+        package: binary-buildpack
+      - name: go_buildpack
+        package: go-buildpack
     security_group_definitions:
       - name: public_networks
         rules:
