@@ -309,8 +309,7 @@ properties:
     agent:
       mode: server
       domain: cf.internal
-      ports:
-        dns: 8600
+      port: 8600
       servers:
         lan:
         - 192.168.10.10
